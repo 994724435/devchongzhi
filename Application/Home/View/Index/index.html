@@ -1,290 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-	<title>金藏源超级牧场</title>
-	<script type="text/javascript" src="__ROOT__/Public/Home/js/fontSize.js"></script>
-	<script type="text/javascript" src="__ROOT__/Public/Home/js/jquery-3.1.1.min.js"></script>
-	<script type="text/javascript" src="__ROOT__/Public/Home/js/index.js"></script>
-	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/aui.min.css">
-	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/style.css">
-	<style type="text/css">
-
-		body{background: url(__ROOT__/Public/Home/img/13.png) no-repeat;background-size:  100% auto;font-family: "楷体";}
-		.nav{position: absolute;bottom: .3rem;left: 0;width: 100%;}
-		.nav li{width: 20%;text-align: center;float: left;display: table-cell;vertical-align: middle;}
-		.nav li img{height: 1.1rem;}
-       /* .oxen{position: relative;} */
-       .niu1{width: 1.5rem;
-        position: absolute;
-        top: 5.3rem;
-        left: 2rem;}
-        .niu2{
-        width: 2rem;
-        position: absolute;
-        top: 5.6rem;
-        left: 5rem;
-       }
-        .niu3{
-        width: 1.7rem;
-        position: absolute;
-        top: 7rem;
-        left: 3.8rem;
-       }
-       .oxen img{display: block;width: 100%;}
-       .oxen span{display: inline-block;padding: 0 .2rem;background: #fff;color: #333;
-            position: absolute;left: -0.2rem;top: -0.2rem;font-size: 11px;
-            border-radius: .7rem;
-            height: 14px;
-            line-height: 14px;
-            opacity: 0;
-        }
-        .good_name{}
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <title>首页</title>
+    <link rel="stylesheet" href="__ROOT__/Public/Home/css/aui.min.css">
+    <link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/swiper.min.css">
+    <link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/font.css">
+    <link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/style.css">
+    <script type="text/javascript" src="__ROOT__/Public/Home/js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="__ROOT__/Public/Home/js/fontSize.js"></script>
+    <script type="text/javascript" src="__ROOT__/Public/Home/js/swiper.min.js"></script>
 </head>
-<body>
-   <!-- 中间七头牛 -->
-    <div class="oxens">
-        <if condition="$you egt 1">
-            <div class="oxen niu1">
-                <img src="__ROOT__/Public/Home/img/1.png" alt="">
-                <span>{$you}</span>
-            </div>
-        </if>
-
-        <if condition="$mu egt 1">
-            <div class="oxen niu2">
-                <img src="__ROOT__/Public/Home/img/2.png" alt="">
-                <span>{$mu}</span>
-            </div>
-        </if>
-
-        <if condition="$hei egt 1">
-            <div class="oxen niu3">
-                <img src="__ROOT__/Public/Home/img/5.png" alt="">
-                <span>{$hei}</span>
-            </div>
-        </if>
+<body class="paddingBottom bodybg">
+<div class="swiper-container">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide"><img src="__ROOT__/Public/Home/img/p_1.png?1" alt="" class="bannerImg"></div>
+        <div class="swiper-slide"><img src="__ROOT__/Public/Home/img/p_2.png?1" alt="" class="bannerImg"></div>
     </div>
-    <!-- 中间七头牛 -->
-	<!-- 耗牛申请 -->
-	<div class="shadow_mask hidden" id="apply_mask">
-        <div class="model"></div>
-        <div class="maskContent">
-            <div class="main_pop_head">
-                <span class="main_return"></span>
-                <span>耗牛申请</span>
-               <img src="__ROOT__/Public/Home/img/x.png" alt="" class="closeImg">
-            </div>
-            <ul class="maskList scroll_table">
-                <li>
-                    <img src="__ROOT__/Public/Home/img/land1.png" alt="">
-                    <ul>
-                        <li>牧场</li>
-                        <li>￥100.00</li>
-                    </ul>
-                    <a href="__ROOT__/index.php/Home/Index/buyniu/id/1"><span class="buySpan" data-money="100" data-id="4">购买</span></a>
-                </li>
-                <li>
-                    <img src="__ROOT__/Public/Home/img/1.png" alt="">
-                    <ul>
-                        <li>幼崽牦牛</li>
-                        <li>￥1000.00</li>
-                    </ul>
-                    <a href="__ROOT__/index.php/Home/Index/buyniu/id/2"> <span class="buySpan" data-money="100" data-id="1">购买</span></a>
-                </li>
-                <li>
-                    <img src="__ROOT__/Public/Home/img/3.png" alt="">
-                    <ul>
-                        <li>黑耗牛</li>
-                        <li>￥5000.00</li>
-                    </ul>
-                    <a href="__ROOT__/index.php/Home/Index/buyniu/id/3"> <span class="buySpan" data-money="100" data-id="3">购买</span></a>
-                </li>
-                <li>
-                    <img src="__ROOT__/Public/Home/img/2.png" alt="">
-                    <ul>
-                        <li>母耗牛</li>
-                        <li>￥10000.00</li>
-                    </ul>
-                    <a href="__ROOT__/index.php/Home/Index/buyniu/id/4">  <span class="buySpan" data-money="100" data-id="2">购买</span></a>
-                </li>
+    <div class="swiper-pagination"></div>
+</div>
+<ul class="tab">
+    <li>
+        <a href="assets.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-wodezichan"></i></li>
+                <li>我的资产</li>
             </ul>
-        </div>
-    </div>
-
-	<!-- 商店弹窗 -->
-    <div class="shadow_mask hidden" id="shopShow">
-        <div class="model"></div>
-        <div class="maskContent" id="shopMask">
-            <div class="main_pop_head">
-                <span class="main_return"></span>
-                <span>商城</span>
-               <img src="__ROOT__/Public/Home/img/x.png" alt="" class="closeImg">
-            </div>
-            <ul class="maskList scroll_table">
-                <foreach name="list" item='v'>
-                <li>
-                    <img src="{$v.pic}" alt="">
-                    <ul>
-                        <li class="good_name">{$v.name}</li>
-                        <li>￥{$v.price}</li>
-                    </ul>
-                    <span class="buySpan" data-money="100" data-id="{$v.id}">购买</span>
-                </li>
-                </foreach>
+        </a>
+    </li>
+    <li>
+        <a href="withdraw.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-tixian"></i></li>
+                <li>账户提现</li>
             </ul>
-        </div>
-        <!-- 购买弹窗 -->
-        <div class="maskContent hidden" id="shopMask1">
-            <div class="main_pop_head">
-                <img src="__ROOT__/Public/Home/img/return.png" alt="" class="returnImg">
-                <span>确认购买</span>
-               <img src="__ROOT__/Public/Home/img/x.png" alt="" class="closeImg">
-            </div>
-            <form action="__ROOT__/index.php/Home/Index/buyproduct" class="scroll_table" method="post"  enctype="multipart/form-data">
-                 <input type="hidden" name="goodsMoney" id="goodsMoney">
-                 <input type="hidden" name="goodsId" id="goodsId">
-                 <ul>
-                    <li class="main_com_li">
-                        <span class="main_com_li_left">库存:</span>
-                        <input type="text" name="" disabled="disabled" value="500" id="kucun">
-                    </li>
-                     <li class="main_com_li">
-                        <span class="main_com_li_left">购买数量:</span>
-                        <input type="number" name="num" value="1" id="buy_num">
-                    </li>  
-                    <li class="main_com_li">
-                        <span class="main_com_li_left">收货人地址:</span>
-                        <input type="text" name="addr">
-                    </li>
-                     <li class="main_com_li">
-                        <span class="main_com_li_left">收货人姓名:</span>
-                        <input type="text" name="username">
-                    </li>  
-                     <li class="main_com_li">
-                        <span class="main_com_li_left">收货人电话:</span>
-                        <input type="text" name="tel">
-                    </li> 
-                    <li class="main_com_li">
-                        <span class="main_com_li_left">邮编:</span>
-                        <input type="text" name="youbian">
-                    </li>
-                 </ul>
-                 <button type="submit" class="confirm">确认购买</button>
-            </form>
-        </div>
-        <!-- 购买弹窗end -->
-    </div>
-    <!-- 商店弹窗end -->
-   
+        </a>
+    </li>
+    <li>
+        <a href="/index.php/Home/User/recharge.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-chongzhi2"></i></li>
+                <li>账户充值</li>
+            </ul>
+        </a>
+    </li>
+    <li>
+        <a href="/index.php/Home/User/upgrade.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-huiyuan"></i></li>
+                <li>会员升级</li>
+            </ul>
+        </a>
+    </li>
+    <li>
+        <a href="telCharge.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-huafeichongzhi"></i></li>
+                <li>话费充值</li>
+            </ul>
+        </a>
+    </li>
+    <li>
+        <a href="">
+            <ul class="grid">
+                <li><i class="iconfont icon-guanwang"></i></li>
+                <li>官网</li>
+            </ul>
+        </a>
+    </li>
+    <li>
+        <a href="shop.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-shangcheng"></i></li>
+                <li>空冲商城</li>
+            </ul>
+        </a>
+    </li>
+    <li>
+        <a href="mall.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-jifenshangcheng"></i></li>
+                <li>积分商城</li>
+            </ul>
+        </a>
+    </li>
+    <li>
+        <a href="contact.html">
+            <ul class="grid">
+                <li><i class="iconfont icon-zaixiankefu"></i></li>
+                <li>在线客服</li>
+            </ul>
+        </a>
+    </li>
+</ul>
 
+<nav class="mui-bar mui-bar-tab">
+    <a class="mui-tab-item  mui-active" data-href="index.html">
+        <span class="mui-icon"><img src="__ROOT__/Public/Home/img/7.png" alt=""></span>
+        <span class="mui-tab-label">首页</span>
+    </a>
+    <a class="mui-tab-item" data-href="/index.php/Home/User/funds.html">
+        <span class="mui-icon" style="width: 20px;"><img src="__ROOT__/Public/Home/img/81.png" alt=""></span>
+        <span class="mui-tab-label">账单</span>
+    </a>
+    <a class="mui-tab-item" data-href="/index.php/Home/User/recharge.html">
+        <span class="mui-icon"><img src="__ROOT__/Public/Home/img/91.png" alt=""></span>
+        <span class="mui-tab-label">充值</span>
+    </a>
+    <a class="mui-tab-item" data-href="/index.php/Home/User/my.html">
+        <span class="mui-icon"><img src="__ROOT__/Public/Home/img/10.png" alt=""></span>
+        <span class="mui-tab-label">我的</span>
+    </a>
+</nav>
+<script type="text/javascript">
+    $(function(){
 
-    <!-- 明细弹窗 -->
-	<div class="shadow_mask hidden" id="detail_mask">
-		<div class="maskContent">
-		<div class="main_pop_head">
-            <span class="main_return"></span>
-            <span>资金明细</span>
-           <img src="__ROOT__/Public/Home/img/x.png" alt="" class="closeImg">
-        </div>
-        <div class="scroll_table">
-			<table class="liushui">
-				<tr>
-			   		<td>事件</td>
-			   		<td>金额</td>
-			   		<td>时间</td>
-			   	</tr>
-                <foreach name="income" item='v'>
-		   		<tr>
-			   		<td>{$v.reson}</td>
-			   		<td><if condition="$v.state eq 1">+<elseif condition="$v.state eq 2"/>-</if>{$v.income}</td>
-                    <td><?php echo date("Y-m-d H:i:s",$v['addtime']); ?></td>
-			   	</tr>
-                </foreach>
-		    </table>
-	    </div>
-	    </div>
-	</div>
-    <!-- 明细弹窗end -->
-    <!-- 我的下级 -->
-	<div class="shadow_mask hidden" id="group_mask">
-		<div class="maskContent" id="group_mask1">
-			<div class="main_pop_head">
-	            <span class="main_return"></span>
-	            <span>我的下级</span>
-	           <img src="__ROOT__/Public/Home/img/x.png" alt="" class="closeImg">
-	        </div>
-	        <div class="scroll_table">
-	        	<button type="button" class="look_xiaji">查看下级提成明细</button>
-				<table class="group">
-			   		<tr>
-				   		<td>会员账号</td>
-				   		<td>下线级别</td>
-				   		<td>注册时间</td>
-				   	</tr>
-                    <foreach name="userlist" item='v' key="k">
-                        <foreach name="v" item='v1'>
-                            <tr>
-                                <td>{$v1.tel}</td>
-                                <td>
-<?php if($k==0){echo '一';}else if($k==1){echo '二';}else if($k==2){echo '三';}else if($k==3){echo '四';}else if($k==4){echo '五';}else if($k==5){echo '六';}else if($k==6){echo '七';}else if($k==7){echo '八';} ?>
-                                    级下线</td>
-                                <td><?php echo date("Y-m-d H:i:s",$v1['addtime']); ?></td>
-                            </tr>
-                        </foreach>
-                    </foreach>
-				   	<!--<tr>-->
-				   		<!--<td>15538867970</td>-->
-				   		<!--<td>一级下线</td>-->
-				   		<!--<td>2015-3-3 12:00:00</td>-->
-				   	<!--</tr>-->
-			    </table>
-		    </div>
-	    </div>
-	    <!-- 下级提成明细弹窗 -->
-        <div class="maskContent hidden" id="lowLevel_Mask">
-            <div class="main_pop_head">
-                <img src="__ROOT__/Public/Home/img/return.png" alt="" class="returnImg">
-                <span>下级提成明细</span>
-                <img src="__ROOT__/Public/Home/img/x.png" alt="" class="closeImg">
-            </div>
-            <div class="scroll_table">
-            	<table class="group">
-			   		<tr>
-				   		<td>会员账号</td>
-				   		<td>级别</td>
-				   		<td>注册时间</td>
-				   	</tr>
-				   	<tr>
-				   		<td>15538867970</td>
-				   		<td>一级下线推荐奖10</td>
-				   		<td>2015-3-3 12:00:00</td>
-				   	</tr>
-				   	<tr>
-				   		<td>15538867970</td>
-				   		<td>二级下线回馈奖10</td>
-				   		<td>2015-3-3 12:00:00</td>
-				   	</tr>
-				   	<tr>
-				   		<td>15538867970</td>
-				   		<td>三级下线牛气奖10</td>
-				   		<td>2015-3-3 12:00:00</td>
-				   	</tr>
-			    </table>
-            </div>
-        </div>
-        <!-- 下级提成明细弹窗 end-->
-	</div>
-    <!-- 我的下级end -->
+        var mySwiper = new Swiper('.swiper-container',{
+            pagination : '.swiper-pagination',
+            paginationClickable :true,
+            autoplay : 2000,
+            autoplayDisableOnInteraction : false,
+            loop : true,
 
-	<ul class="nav">
-		<li><img src="__ROOT__/Public/Home/img/11.png" alt=""  id="open_apply"></li>
-		<li><img src="__ROOT__/Public/Home/img/12.png" alt=""  id="open_shop"></li>
-		<li><img src="__ROOT__/Public/Home/img/15.png" alt="" id="open_group"></li>
-		<li><img src="__ROOT__/Public/Home/img/7.png" alt="" id="open_detail"></li>
-		<li><img src="__ROOT__/Public/Home/img/8.png" alt="" onclick="location.href='__ROOT__/index.php/Home/User/my.html'"></li>
-	</ul>
+        })
+        $("#buy").click(function() {
+            window.location.href="detail.html"
+        });
+        $(".select li").click(function() {
+            $(this).addClass('selected').siblings().removeClass('selected');
+        });
+
+    });
+</script>
 </body>
 </html>

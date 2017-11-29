@@ -11,33 +11,6 @@ class UserController extends CommonController{
         $this->display();
     }
 
-    /**
-     * 公司简介
-     */
-    public function intro(){
-        $article = M('article')->where(array('aid'=>1))->find();
-        $this->assign('res',$article);
-        $this->display();
-    }
-
-    /**
-     * 文章详情
-     */
-    public function notice_detail(){
-        $article = M('article')->where(array('aid'=>$_GET['id']))->find();
-        $this->assign('res',$article);
-        $this->display();
-    }
-
-    /**
-     * 文章列表
-     */
-    public function notice(){
-        $article = M('article')->where(array('type'=>2))->order('aid DESC')->select();
-        $this->assign('res',$article);
-        $this->display();
-    }
-
 
     public function my(){
         $menber =M("menber");
@@ -272,9 +245,6 @@ class UserController extends CommonController{
     }
 
 
-
-
-
     /*
      * 积分充值
      */
@@ -346,12 +316,6 @@ class UserController extends CommonController{
         $this->display();
     }
 
-    /*
-     * 个人资料
-     */
-    public function my_data(){
-        $this->display();
-    }
 
     /*
     * 完善资料
@@ -368,87 +332,6 @@ class UserController extends CommonController{
         $this->display();
     }
 
-    /*
-    * 1收益 2充值 3静态提现  4动态体现  5 注册下级 6下单购买 7积分体现 8积分转账 9 回馈奖 10牧场收益 11 幼崽收益 12成年 13母牦牛
-     */
-    public function width_draw(){
-        $lilv =  M("config")->where(array('id'=>18))->find();
-        $lilv =$lilv['value'];
-        if($_POST){
-            if($_POST['num']<=0){
-                echo "<script>alert('请输入正确金额在');";
-                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
-                echo "</script>";
-                exit;
-            }
-            $menber =M('menber');
-            $res_user = $menber->where(array('uid'=>session('uid')))->select();
-            if($res_user[0]['pwd2'] != $_POST['pwd2']){
-                echo "<script>alert('二级密码错误');";
-                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
-                echo "</script>";
-                exit;
-            }
-
-//            if($_POST['num'] <100){
-//                echo "<script>alert('提现额度小于100');";
-//                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
-//                echo "</script>";
-//                exit;
-//            }
-
-            $max = M("config")->where(array('id'=>19))->find();
-            if($_POST['num'] > $max['value']){
-                echo "<script>alert('提现额度大于".$max['value']."');";
-                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
-                echo "</script>";
-                exit;
-            }
-
-//            $income =M('incomelog');
-//            $istoday =$income->where(array('type'=>7,'userid'=>session('uid'),'addymd'=>date('Y-m-d',time())))->find();
-//            if($istoday['userid']){
-//                echo "<script>alert('每日提现允许一次');";
-//                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
-//                echo "</script>";
-//                exit;
-//            }
-
-            $left = bcsub($res_user[0]['chargebag'],$_POST['num'],2);
-
-            $lilcv = $lilv;
-            $fei = bcmul($_POST['num'],$lilcv,2);
-            $left = bcsub($left,$fei,2);
-            if($left > 0){
-                $re = $menber->where(array('uid'=>session('uid')))->save(array('chargebag'=>$left));
-                if($re){
-                    $income =M('incomelog');
-                    $data['type'] =7;
-                    $data['state'] =0;
-                    $data['reson'] ='余额提现';
-                    $data['addymd'] =date('Y-m-d',time());
-                    $data['addtime'] =time();
-                    $data['orderid'] =session('uid');
-                    $data['userid'] =session('uid');
-                    $data['income'] =$_POST['num'];
-                    $income->add($data);
-                    $resreson ="提现".$_POST['num']."元";
-                    echo "<script>alert('".$resreson."待管理员确认');";
-                    echo "window.location.href='".__ROOT__."/index.php/Home/User/my';";
-                    echo "</script>";
-                    exit;
-                }
-            }else{
-                echo "<script>alert('余额不足');";
-                echo "window.location.href='".__ROOT__."/index.php/Home/User/my';";
-                echo "</script>";
-                exit;
-            }
-
-        }
-        $this->assign('lilv',$lilv);
-        $this->display();
-    }
 
 
 
@@ -620,12 +503,6 @@ class UserController extends CommonController{
         }else{
             return 0 ;
         }
-    }
-
-    public function suBuyBi(){
-        $bi = 50;
-        $userid = 28;
-
     }
 
 

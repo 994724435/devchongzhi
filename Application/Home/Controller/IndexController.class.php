@@ -3,16 +3,91 @@ namespace Home\Controller;
 use Think\Controller;
 header('content-type:text/html;charset=utf-8');
 class IndexController extends CommonController {
-//	public function _initialize(){
-//		if($_GET['openid']){
-//			$menber =M('menber');
-//			$user=$menber->where(array('openid'=>$_GET['openid']))->select();
-//			S('name',$user[0]['name']);
-//			S('userid',$user[0]['id']);
-//			S('nickname',$user[0]['nickname']);
-//		}
-//	}
-   //主页
+
+    /*
+  * 1收益 2充值 3静态提现  4动态体现  5 注册下级 6下单购买 7积分体现 8积分转账 9 回馈奖 10牧场收益 11 幼崽收益 12成年 13母牦牛
+   */
+    public function withdraw(){
+        $lilv =  M("config")->where(array('id'=>18))->find();
+        $lilv =$lilv['value'];
+        if($_POST){
+            if($_POST['num']<=0){
+                echo "<script>alert('请输入正确金额在');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
+                echo "</script>";
+                exit;
+            }
+            $menber =M('menber');
+            $res_user = $menber->where(array('uid'=>session('uid')))->select();
+            if($res_user[0]['pwd2'] != $_POST['pwd2']){
+                echo "<script>alert('二级密码错误');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
+                echo "</script>";
+                exit;
+            }
+
+//            if($_POST['num'] <100){
+//                echo "<script>alert('提现额度小于100');";
+//                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
+//                echo "</script>";
+//                exit;
+//            }
+
+            $max = M("config")->where(array('id'=>19))->find();
+            if($_POST['num'] > $max['value']){
+                echo "<script>alert('提现额度大于".$max['value']."');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
+                echo "</script>";
+                exit;
+            }
+
+//            $income =M('incomelog');
+//            $istoday =$income->where(array('type'=>7,'userid'=>session('uid'),'addymd'=>date('Y-m-d',time())))->find();
+//            if($istoday['userid']){
+//                echo "<script>alert('每日提现允许一次');";
+//                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
+//                echo "</script>";
+//                exit;
+//            }
+
+            $left = bcsub($res_user[0]['chargebag'],$_POST['num'],2);
+
+            $lilcv = $lilv;
+            $fei = bcmul($_POST['num'],$lilcv,2);
+            $left = bcsub($left,$fei,2);
+            if($left > 0){
+                $re = $menber->where(array('uid'=>session('uid')))->save(array('chargebag'=>$left));
+                if($re){
+                    $income =M('incomelog');
+                    $data['type'] =7;
+                    $data['state'] =0;
+                    $data['reson'] ='余额提现';
+                    $data['addymd'] =date('Y-m-d',time());
+                    $data['addtime'] =time();
+                    $data['orderid'] =session('uid');
+                    $data['userid'] =session('uid');
+                    $data['income'] =$_POST['num'];
+                    $income->add($data);
+                    $resreson ="提现".$_POST['num']."元";
+                    echo "<script>alert('".$resreson."待管理员确认');";
+                    echo "window.location.href='".__ROOT__."/index.php/Home/User/my';";
+                    echo "</script>";
+                    exit;
+                }
+            }else{
+                echo "<script>alert('余额不足');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/my';";
+                echo "</script>";
+                exit;
+            }
+
+        }
+        $this->assign('lilv',$lilv);
+        $this->display();
+    }
+
+
+    //主页
 	public function index(){
 		$pro =M('product');
 		$prolist= $pro->order('id DESC')->where(array('state'=>1))->select();
@@ -252,45 +327,6 @@ class IndexController extends CommonController {
     }
 
 
-    /**
-     * 公司简介
-     */
-    public function introduce(){
-        $article =M('article');
-        $intro= $article->order('aid DESC')->where(array('type'=>5))->select();
-        $this->assign('intro',$intro[0]);
-        $this->display();
-    }
-
-    /**
-     * 公告
-     */
-    public function advertising(){
-        $article =M('article');
-        $intro= $article->where(array('aid'=>$_GET['id']))->select();
-        $this->assign('intro',$intro[0]);
-        $this->display();
-    }
-
-    /**
-     * 值班团队
-     */
-    public function gruop(){
-        $article =M('article');
-        $intro= $article->where(array('aid'=>$_GET['id']))->select();
-        $this->assign('intro',$intro[0]);
-        $this->display();
-    }
-
-    /**
-     * 分析专家
-     */
-    public function professor(){
-        $article =M('article');
-        $intro= $article->where(array('aid'=>$_GET['id']))->select();
-        $this->assign('intro',$intro[0]);
-        $this->display();
-    }
 
 
 	//我的产品
@@ -323,11 +359,6 @@ class IndexController extends CommonController {
         $this->display();
     }
 
-    public function choose(){
-        $log = M('incomelog')->order('id DESC')->where(array('userid'=>session('uid'),'type'=>2))->select();
-        $this->assign('log',$log);
-        $this->display();
-    }
 
     public function qrcode(){
         Vendor('phpqrcode.phpqrcode');
@@ -343,18 +374,7 @@ class IndexController extends CommonController {
         $object->png($url, false, $errorCorrectionLevel, $matrixPointSize, 2);
     }
 
-    public function gongPai(){
-        echo "<script>alert('显示公排暂未开放，敬请期待');";
-        echo "window.location.href='".__ROOT__."/index.php/Home/Index/index';";
-        echo "</script>";
-        exit;
 
-        $orderlog = M('orderlog');
-        $allorder = $orderlog->where(array('type'=>2,'userid'=>session('uid')))->order('logid ASC')->select();
-//        print_r($allorder);die;
-        $this->assign('res',$allorder[0]);
-        $this->display();
-    }
 
     public function gongpai_buy(){
         if($_POST['num']){
