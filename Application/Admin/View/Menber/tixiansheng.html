@@ -1,0 +1,81 @@
+
+
+<include file="Common/header" />
+<!-- <include file="./Public/conn/header.html" />   -->
+        <div id="page-wrapper">
+        <div class="graphs">
+     	
+    
+	  
+    <div class="content_bottom">
+		<if condition="$manager eq 2"><h3>提现待审核</h3></if>
+     <div class="col-md-12 span_3">
+		  <div class="bs-example1" data-example-id="contextual-table">
+		    <table class="table">
+		      <thead>
+		        <tr>
+
+		          <!--<th>用户名</th>-->
+					<th>用户ID</th>
+					<th>提现方式</th>
+					<th>充值金额</th>
+					<th>姓名</th>
+					<th>微信</th>
+					<th>支付宝</th>
+
+					<th>卡号</th>
+					<th>开户姓名</th>
+					<th>开户行</th>
+					<th>操作</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		      <?php 
+		      		$i = 1;
+		      	?>
+		      <foreach name="res" item='v'>
+		      
+		      	<?php 
+		      		if(($i%2)==1){
+						echo "<tr class='active'>";
+					}else{
+						echo "<tr class='info'>";
+					}
+		      	?>
+
+		          <!--<td scope="row">{$v.name}</td>-->
+				  <td scope="row">{$v.userid}</td>
+				  <td>{$v.reson}</td>
+				  <td>{$v.income}</td>
+				  <td>{$v.realname}</td>
+
+				  <td>{$v.weixin}</td>
+				  <td>{$v.zhifubao}</td>
+				  <td>{$v.bank}</td>
+				  <td>{$v.bankname}</td>
+				  <td>{$v.bankfrom}</td>
+				  <td> <a href="__ROOT__/index.php/Admin/Menber/tixiandetail/id/{$v.id}">操 作</a></td>
+		          <!--<td><if condition="$manager eq 2"><a href="__ROOT__/index.php/Admin/Menber/istixian/id/{$v.id}/state/1">通 过</a> | <a href="__ROOT__/index.php/Admin/Menber/istixian/id/{$v.id}/state/2">不 通 过</a><elseif condition="$manager eq 1"/>暂无权限操作</if></td>-->
+		        </tr>
+		      	<?php $i++ ;?>
+		       </foreach>
+		        
+		        
+		      </tbody>
+		    </table>
+		   </div>
+	   </div>
+		<div class="clearfix"> </div>
+	    </div>
+		<div class="copy">
+            <p>Copyright &copy; 2016 All rights reserved.</p>
+	    </div>
+		</div>
+       </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__ROOT__/Public/Admin/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>个人中心</title>
+	<link rel="stylesheet" href="__ROOT__/Public/Home/css/aui.min.css">
+	<link rel="stylesheet" href="__ROOT__/Public/Home/css/user.css">
+	<style type="text/css">
+		body{background: url('__ROOT__/Public/Home/images/bgg.jpg') no-repeat;background-size: 100%; }
+
+	</style>
+</head>
+<body>
+<!-- <img src="img/bgg.jpg" alt="" class="bg"> -->
+<header class="mui-bar mui-bar-nav">
+	<h1 class="mui-title">个人中心</h1>
+	<img src="__ROOT__/Public/Home/images/31.png" alt="" class="note mui-pull-right">
+</header>
+
+<div class="mui-content">
+
+	<div class="title">
+		<img src="__ROOT__/Public/Home/images/34.jpg" alt="" class="photo">
+		<ul class="info">
+			<li>
+				<!--张三-->{$username}
+				<!--<span class="tel">{$username}</span>-->
+			</li>
+			<li style="font-size: 12px;">{$usertype}</li>
+			<li class="btns">
+				<a href="addMoney.html" class="chongzhi"><img src="__ROOT__/Public/Home/images/29.png" alt="">充值</a>
+				<a href="drawCash.html" class="cash"><img src="__ROOT__/Public/Home/images/30.png" alt="">提现</a>
+			</li>
+		</ul>
+	</div>
+	<ul class="tab">
+		<li data-href="group.html">
+			<ul>
+				<li><img src="__ROOT__/Public/Home/images/22.png" alt=""></li>
+				<li>我的团队</li>
+			</ul>
+		</li>
+		<li data-href="mySwitchMoney.html">
+			<ul>
+				<li><img src="__ROOT__/Public/Home/images/23.png" alt="" style="width: 18%;"></li>
+				<li>我要转账</li>
+			</ul>
+		</li>
+		<li data-href="regNext.html">
+			<ul>
+				<li><img src="__ROOT__/Public/Home/images/24.png" alt="" style="width: 17%;"></li>
+				<li>注册下级</li>
+			</ul>
+		</li>
+		<!-- 	<li>
+                <ul>
+                    <li><img src="img/26.png" alt="" style="width: 18%;"></li>
+                    <li>网站公告</li>
+                </ul>
+            </li> -->
+	</ul>
+	<ul>
+		<ul class="list" style="margin-bottom: 20px;">
+			<li data-href="payRecord.html">
+				<img src="__ROOT__/Public/Home/images/25.png" alt="">
+				充值记录
+			</li>
+			<li data-href="cashRecord.html">
+				<img src="__ROOT__/Public/Home/images/26.png" alt="">
+				提现记录
+			</li>
+			<li data-href="cashDetail.html">
+				<img src="__ROOT__/Public/Home/images/27.png" alt="">
+				资金明细
+			</li>
+			<li  data-href="switchMoney.html">
+				<img src="__ROOT__/Public/Home/images/27.png" alt="">
+				钱包互转
+			</li>
+
+			<li data-href="modifyPwd.html">
+				<img src="__ROOT__/Public/Home/images/28.png" alt="">
+				修改密码
+			</li>
+		</ul>
+
+</div>
+
+<include file="Common/footer" />
+<script src="__ROOT__/Public/Home/js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+	$("nav a,.list>li,.tab li").click(function() {
+		var href=$(this).attr('data-href');
+		if(href){
+			window.location.href=href;
+		}
+	});
+
+</script>
+</body>
+</html>

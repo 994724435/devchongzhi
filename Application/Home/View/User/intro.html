@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>公司简介</title>
+	<link rel="stylesheet" href="__ROOT__/Public/Home/css/aui.min.css">
+	<link rel="stylesheet" href="__ROOT__/Public/Home/css/style.css">
+	<script type="text/javascript" src="__ROOT__/Public/Home/js/fontSize.js"></script>
+	<script type="text/javascript" src="__ROOT__/Public/Home/js/aui.js"></script>
+	<style type="text/css">
+	.mui-table-view-cell>a:not(.mui-btn){white-space: normal;}
+	.intro_img{width:100%;display: block; }
+	.inrto_text{font-size: .3rem;line-height: .45rem;padding: .1rem .3rem .4rem .3rem;background: #fff;text-indent: .3rem;}
+	</style>
+</head>
+<body>
+     <header class="mui-bar mui-bar-nav">
+	  <a class="mui-icon mui-icon-left-nav mui-pull-left mui-action-back"></a>
+	  <a class="mui-icon mui-icon-reply mui-pull-right"></a>
+	  <h1 class="mui-title">{$res.title}</h1>
+	</header>
+	<div class="mui-content">
+	    <!--<img src="http://b.hiphotos.baidu.com/image/h%3D300/sign=a642e6c779cf3bc7f700cbece101babd/79f0f736afc37931cb1e9ce3e2c4b74542a91181.jpg" alt="" class="intro_img">-->
+	    <div class="inrto_text">
+			{$res.cont}
+	    	 </div>
+	</div>
+</body>
+</html>

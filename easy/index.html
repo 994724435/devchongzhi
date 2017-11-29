@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>首页</title>
+	<link rel="stylesheet" href="css/aui.min.css">
+	<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_487606_jg7g56k5llfh6w29.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/fontSize.js"></script>
+	<script type="text/javascript" src="js/swiper.min.js"></script>
+</head>
+<body class="paddingBottom bodybg">
+    <div class="swiper-container">
+	    <div class="swiper-wrapper">
+	        <div class="swiper-slide"><img src="img/p_1.png?1" alt="" class="bannerImg"></div>
+	        <div class="swiper-slide"><img src="img/p_2.png?1" alt="" class="bannerImg"></div>
+	    </div>
+	    <div class="swiper-pagination"></div>
+	</div>
+	<ul class="tab">
+		<li>
+			<a href="assets.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-wodezichan"></i></li>
+					<li>我的资产</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+			<a href="withdraw.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-tixian"></i></li>
+					<li>账户提现</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+			<a href="recharge.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-chongzhi2"></i></li>
+					<li>账户充值</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+			<a href="upgrade.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-huiyuan"></i></li>
+					<li>会员升级</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+			<a href="telCharge.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-huafeichongzhi"></i></li>
+					<li>话费充值</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+			<a href="">
+				<ul class="grid">
+					<li><i class="iconfont icon-guanwang"></i></li>
+					<li>官网</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+			<a href="shop.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-shangcheng"></i></li>
+					<li>空冲商城</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+		    <a href="mall.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-jifenshangcheng"></i></li>
+					<li>积分商城</li>
+				</ul>
+			</a>
+		</li>
+		<li>
+			<a href="contact.html">
+				<ul class="grid">
+					<li><i class="iconfont icon-zaixiankefu"></i></li>
+					<li>在线客服</li>
+				</ul>
+			</a>
+		</li>
+	</ul>
+	
+	<nav class="mui-bar mui-bar-tab">
+		<a class="mui-tab-item  mui-active" data-href="index.html">
+			<span class="mui-icon"><img src="img/7.png" alt=""></span>
+			<span class="mui-tab-label">首页</span>
+		</a>
+		<a class="mui-tab-item" data-href="funds.html">
+			<span class="mui-icon" style="width: 20px;"><img src="img/81.png" alt=""></span>
+			<span class="mui-tab-label">账单</span>
+		</a>
+		<a class="mui-tab-item" data-href="recharge1.html">
+			<span class="mui-icon"><img src="img/91.png" alt=""></span>
+			<span class="mui-tab-label">充值</span>
+		</a>
+		<a class="mui-tab-item" data-href="my.html">
+			<span class="mui-icon"><img src="img/10.png" alt=""></span>
+			<span class="mui-tab-label">我的</span>
+		</a>
+	</nav>
+	<script type="text/javascript">
+		$(function(){
+		 
+			var mySwiper = new Swiper('.swiper-container',{
+		       pagination : '.swiper-pagination',
+			   paginationClickable :true,
+			   autoplay : 2000,
+			   autoplayDisableOnInteraction : false,
+			   loop : true,
+			
+			})
+			$("#buy").click(function() {
+				 window.location.href="detail.html"
+			});
+			$(".select li").click(function() {
+				 $(this).addClass('selected').siblings().removeClass('selected');
+			});
+
+		});
+	</script>
+</body>
+</html>

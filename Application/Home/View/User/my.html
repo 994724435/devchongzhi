@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>个人中心</title>
+	<link rel="stylesheet" href="__ROOT__/Public/Home/css/aui.min.css">
+	<script type="text/javascript" src="__ROOT__/Public/Home/js/fontSize.js"></script>
+	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/style.css">
+	<script type="text/javascript" src="__ROOT__/Public/Home/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="__ROOT__/Public/Home/js/aui.js"></script>
+	<style type="text/css">
+	    .photo{width: 60px;height: 60px;border-radius: 50%;vertical-align: initial;margin: 0 15px;float: left;position: relative;top: 20px;}
+	    .title{background: #5da200;padding: 20px 0 30px 0;overflow: hidden;position: relative}
+		.loginout{position: absolute;width: 24px;right: 10px;top: 20px;}
+	    .info{display: inline-block;font-size: 14px;color: #fff;line-height: 25px;float: left;}
+	    .tab{padding: 15px 0;background: #fff;height: 80px}
+	    .tel{font-size: 14px;}
+		.tab>li{width: 50%;float: left;text-align: center;font-size: 15px;}
+		.tab>li ul{line-height: 25px;}
+		.tab>li ul>li:last-child{font-size: 17px;color: #ff0125;}
+		.tab>li ul>li:last-child span{font-size: 14px;}
+		.tab1{border-bottom: 1px solid #eee;padding: 10px 0;}
+		.tab1,.tab{overflow: hidden;background: #fff;}
+		.tab1>li{width: 25%;float: left;text-align: center;font-size: 12px;box-sizing: border-box;}
+		.tab1>li ul{line-height: 25px;}
+		.tab1>li ul>li:last-child{font-size: 14px;color: #ff0125;}
+		.tab1>li ul>li:last-child span{font-size: 14px;}
+		.grid{overflow: hidden;}
+		.grid>li{width: 33.3%;float: left;background: #fff;border:1px solid #ddd;}
+		.grid>li img{width: 43%;}
+		.grid>li li:first-child{height: 60px;padding-top: 10px;text-align: center;}
+		.grid>li li:last-child{font-size: 14px;text-align: center;height: 30px;line-height: 30px;}
+		.mui-action-back{position: absolute;top: .2rem;left: .1rem;font-size: 26px;}
+		/*.tab>li a{padding: .1rem .2rem;color: #fff;border-radius: .1rem;background: }*/
+			.tab>li a{	display: inline-block;
+		    background: rgb(253, 59, 12);
+		    color: #FFFFFF;
+		    width: 1rem;
+		    height: 0.5rem;
+		    line-height: .5rem;
+		    text-align: center;
+		    /*box-shadow: 4px 4px 4px #C4C5C5;*/
+		    border-radius: 0.1rem;
+		  
+		    font-size: .28rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="mui-content">
+		<div class="title">
+		   <a class="mui-icon mui-icon-left-nav mui-action-back"></a>
+
+	   	   <img src="__ROOT__/Public/Home/img/p_14.png" alt="" class="photo">
+	   	   <ul class="info">
+	   	   	    <li>用户名：<span class="tel">{$username.tel}</span></li>
+	   	   	    <li>返款总金藏币：<span class="tel">{$allfan}</span></li>
+	   	   	    <li>已返金藏币：<span class="tel">{$incomes}</span></li>
+	   	   	    <li>未返金藏币：<span class="tel">{$left}</span></li>
+	   	   </ul>
+	   	   <img src="__ROOT__/Public/Home/img/p_15.png" alt="" class="loginout">
+		</div>
+		<ul class="tab1">
+			<li>
+				<ul>
+					<li>返款总牛气奖</li>
+					<li>{$username.niuqi}</li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li>已返牛气奖</li>
+					<li>{$xiaoniuqi}</li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li>未返牛气奖</li>
+					<li>{$sheng}</li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li>物流信息</li>
+					<li>{$msg}</li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="tab">
+			<li>
+				<ul>
+					<li>个人钱包：{$username.chargebag}</li>
+					<li><a href="width_draw.html">提现</a></li>
+				</ul>
+			</li>
+			<li>
+				<ul>
+					<li>商城积分：{$username.dongbag}</li>
+					<li><a href="index.html">购买</a></li>
+				</ul>
+			</li>
+		</ul>
+		<ul class="mui-table-view">
+			<li class="mui-table-view-cell">
+				 已养殖耗牛品种：耗牛
+				<span class="fr">{$niu}只</span>
+			</li>
+			<li class="mui-table-view-cell">
+			    <a class="mui-navigate-right" href="intro.html">
+			    公司简介
+			    </a>
+		    </li>
+		    <li class="mui-table-view-cell">
+			    <a class="mui-navigate-right" href="notice.html">
+			    公司公告
+			    </a>
+		    </li>
+		    <li class="mui-table-view-cell">
+			    <a class="mui-navigate-right" href="popularize/id/{$username.uid}">
+			    我要推广
+			    </a>
+		    </li>
+		    <li class="mui-table-view-cell">
+			    <a class="mui-navigate-right" href="contact.html">
+			     联系客服
+			    </a>
+		    </li>
+		</ul>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			  mui("body").on("tap","a",function(){
+				var href=$(this).attr('href');
+			   if(href){
+			   	   window.location.href=href;
+			   } 
+			});
+		    $(".loginout").click(function() {
+		    	  var btnArray = ['否', '是'];
+		    	  mui.confirm('确定要退出登录？', '提示', btnArray, function(e) {
+					if (e.index == 1) {
+						console.log("确定退出");
+                        window.location.href='/index.php/Home/Login/login';
+					} else {
+						console.log("取消退出");
+					}
+				})
+		    });
+		  
+
+
+		})
+	</script>
+</body>
+</html>

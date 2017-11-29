@@ -1,0 +1,76 @@
+
+
+
+<include file="Common/header" />
+           
+        
+        <div id="page-wrapper">
+        <div class="graphs">	  
+    <div class="content_bottom">
+     <div class="col-md-12 span_3">
+		  <div class="bs-example1" data-example-id="contextual-table">
+		    <table class="table">
+		      <thead>
+		        <tr style="text-align: center;">
+					<form class="form-horizontal" action="" method="get" enctype="multipart/form-data">
+					<h4> <span><a href="__ROOT__/index.php/Admin/Article/addarticle">添加文章</a></span>
+						&nbsp;&nbsp;&nbsp;
+
+						文章类型<select style="width: 150px" name="type">
+							<option value="0">全部</option>
+							<option value="1">公司简介</option>
+							<option value="2">公司公告</option>
+							<!--<option value="3">值班团队</option>-->
+							<!--<option value="4">分析专家</option>-->
+						</select>
+						<input type="submit" value="筛 选">
+					</h4>
+					</form>
+				</tr>
+		        <tr>
+		          <th>编号</th>
+					<th>标题</th>
+					<th>类型</th>
+					<!--<th>内容</th>-->
+					<th>操作</th>
+		        </tr>
+		      </thead>
+		      <tbody>	      
+		      <?php 
+		      		$i = 1;
+		      	?>
+		      <foreach name="res" item='v'>
+		      
+		      	<?php 
+		      		if(($i%2)==1){
+						echo "<tr class='active'>";
+					}else{
+						echo "<tr class='info'>";
+					}
+		      	?>
+		          <th scope="row">{$v.aid}</th>
+				  <th>{$v.title}</th>
+				  <th><if condition="$v.type eq 1"> 公司简介<elseif condition="$v.type eq 2"/>公司简介 </if></th>
+		          <!--<th style="width: 500px;max-height:50px;">{$v.cont}</th>-->
+				  <th><a href="__ROOT__/index.php/Admin/Article/editearticle/id/{$v.aid}">修 改</a>|<a href="__ROOT__/index.php/Admin/Article/delete/id/{$v.aid}">删 除</a></th>
+			  </tr>
+		      	<?php $i++ ;?>
+		       </foreach>		      
+		      </tbody>
+		    </table>
+		   </div>
+	   </div>
+		<div class="clearfix"> </div>
+	    </div>
+		<div class="copy">
+            <p>Copyright &copy; 2016  All rights reserved.</p>
+	    </div>
+		</div>
+       </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__ROOT__/Public/admin/js/bootstrap.min.js"></script>
+</body>
+</html>

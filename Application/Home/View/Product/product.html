@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>理财产品</title>
+	<link rel="stylesheet" href="__ROOT__/Public/Home/css/aui.min.css">
+	<link rel="stylesheet" href="__ROOT__/Public/Home/css/product.css">
+	<style type="text/css">
+
+	</style>
+</head>
+<body>
+	<header class="mui-bar mui-bar-nav">	
+		<h1 class="mui-title">理财产品</h1>
+	</header>
+	<div class="mui-content">	
+		<ul class="list">
+			<foreach name="list" item='v'>
+				<li data-href="__ROOT__/index.php/Home/Product/detail/id/{$v.id}">
+					<img src="{$v.pic}" alt="" class="liImg">
+					<span>{$v.name}</span>
+					<ul>
+						<li class="time">有效天数：{$v.effectdays}天</li>
+						<li class="money">每日收益：{$v.daycome}元</li>
+						<li class="sales">销量{$v.salenum}份</li>
+					</ul>
+					<img src="__ROOT__/Public/Home/images/6.png" alt="" class="add">
+				</li>
+			</foreach>
+		</ul>
+	</div>
+	<include file="Common/footer" />
+	<script src="__ROOT__/Public/Home/js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript">
+	$("nav a,.list>li,.tab li").click(function() {
+		   var href=$(this).attr('data-href');
+		   if(href){
+		   	   window.location.href=href;
+		   }
+	});
+	$(".list li").click(function() {
+		var href=$(this).attr('data-href');
+		if(href){
+			window.location.href=href;
+		}
+	});
+		// $(".list>li").height($(".liImg").height())
+	</script>
+</body>
+</html>

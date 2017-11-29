@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<include file="Common/header" />
+        <div id="page-wrapper">
+        <div class="graphs">
+	     <div class="xs">
+  	       <h3>用户添加</h3>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form">
+							<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">用户名</label>
+									<div class="col-sm-8">
+										<input type="text" name="name" value="{$re.name}" disabled class="form-control1" id="focusedinput" placeholder="">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">新密码</label>
+									<div class="col-sm-8">
+										<input type="password" name="psd1" class="form-control1" id="focusedinput" placeholder="">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">角色</label>
+									<div class="col-sm-8">
+									        <select class="form-control1" name="manager">
+								                  <option value="2">超级管理员</option>
+								                  <option value="1">管理员</option>
+								          </select>
+									</div>
+								</div>
+
+							      <div class="panel-footer">
+									<div class="row">
+										<div class="col-sm-8 col-sm-offset-2">
+											<button class="btn-success btn">Submit</button>
+										</div>
+									</div>
+								 </div>
+								
+								
+							</form>
+						</div>
+					</div>
+
+ 
+	
+  </div>
+  <div class="copy_layout">
+      <p>Copyright &copy; 2016 name All rights reserved.</p>
+  </div>
+  </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="__ROOT__/Public/admin/css/custom.css" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="__ROOT__/Public/admin/js/metisMenu.min.js"></script>
+<script src="__ROOT__/Public/admin/js/custom.js"></script>
+ <script src="__ROOT__/Public/admin/js/bootstrap.min.js"></script>
+</body>
+</html>

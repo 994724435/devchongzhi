@@ -1,0 +1,97 @@
+
+
+
+<include file="Common/header" />
+
+
+<div id="page-wrapper">
+	<div class="graphs">
+		<div class="content_bottom">
+			<div class="col-md-12 span_3">
+				<div class="bs-example1" data-example-id="contextual-table">
+		<!--1收益 2充值 3静态提现  4动态提现  5 注册下级 6下单购买 7退本 8静态转账 9动态转账 10静态收益 11 动态收益-->
+					<form class="form-horizontal" action="" method="get" enctype="multipart/form-data">
+						<h3>资金变动列表</h3>
+						<div class="form-group">
+							用户id <input type="text" name="uid" style="width: 150px" value="" id="focusedinput" placeholder="">
+							日期 <input type="date" name="mindate" style="width: 150px" value="" id="focusedinput" placeholder="">
+							     <input type="date" name="maxdate" style="width: 150px" value="" id="focusedinput" placeholder="">
+							类型<select style="width: 150px" name="type">
+							<option value="0">全部</option>
+							<option value="2">用户充值</option>
+							<option value="3">静态提现</option>
+							<option value="4">动态提现</option>
+							<option value="6">下单购买</option>
+							<option value="7">退本</option>
+							<option value="8">静态转账</option>
+							<option value="9">动态转账</option>
+							<option value="10">静态收益</option>
+							<option value="11">动态收益</option>
+						</select>
+
+						</div>
+
+						<div class="col-sm-2">
+							<p class="help-block"></p>
+						</div>
+
+						<p style="margin-left: 200px;margin-top: 20px;"></p><button class="btn-success btn">Submit</button>
+					</form>
+					<table class="table">
+						<thead>
+
+						<tr style="text-align: center;">
+
+						</tr>
+						<tr>
+							<th>用户id</th>
+							<th>状态</th>
+							<th>资金</th>
+							<th>类型</th>
+							<th>时间</th>
+							<th>原因</th>
+						</tr>
+						</thead>
+						<tbody>
+						<?php
+		      		$i = 1;
+		      	?>
+						<foreach name="users" item='v'>
+
+							<?php
+		      		if(($i%2)==1){
+						echo "<tr class='active'>";
+							}else{
+							echo "<tr class='info'>";
+							}
+							?>
+							<th scope="row">{$v.userid}</th>
+							<th><if condition="$v.state eq 1"> 收入<elseif condition="$v.state eq 2"/>支出</if></th>
+							<th>{$v.income}</th>
+
+							<th><if condition="$v.type eq 1"> 收益<elseif condition="$v.type eq 2"/>充值<elseif condition="$v.type eq 3"/>静态提现<elseif condition="$v.type eq 4"/>动态体现<elseif condition="$v.type eq 5"/>注册下级
+								<elseif condition="$v.type eq 6"/>下单购买<elseif condition="$v.type eq 7"/>退本<elseif condition="$v.type eq 8"/>静态转账<elseif condition="$v.type eq 9"/>动态转账<elseif condition="$v.type eq 10"/>静态收益<elseif condition="$v.type eq 11"/>动态收益</if></th>
+							<th>{$v.addymd}</th>
+
+							<th>{$v.reson}</th>
+						</tr>
+							<?php $i++ ;?>
+						</foreach>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="copy">
+			<p>Copyright &copy; 2016  All rights reserved.</p>
+		</div>
+	</div>
+</div>
+<!-- /#page-wrapper -->
+</div>
+<!-- /#wrapper -->
+<!-- Bootstrap Core JavaScript -->
+<script src="__ROOT__/Public/admin/js/bootstrap.min.js"></script>
+</body>
+</html>

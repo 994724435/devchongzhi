@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link rel="stylesheet" href="__ROOT__/Public/Admin/js/themes/default/default.css" />
+	<link rel="stylesheet" href="__ROOT__/Public/Admin/plugins/code/prettify.css" />
+	<script charset="utf-8" src="__ROOT__/Public/Admin/js/kindeditor.js"></script>
+	<script charset="utf-8" src="__ROOT__/Public/Admin/js/lang/zh_CN.js"></script>
+	<script charset="utf-8" src="__ROOT__/Public/Admin/js/plugins/code/prettify.js"></script>
+	<script>
+		KindEditor.ready(function(K) {
+			var editor1 = K.create('textarea[name="content1"]', {
+				cssPath : '__ROOT__/Public/Admin/js/plugins/code/prettify.css',
+				uploadJson : '__ROOT__/Public/Admin/js/php/upload_json.php',
+				fileManagerJson : '__ROOT__/Public/Admin/js/php/file_manager_json.php',
+				allowFileManager : true,
+				afterCreate : function() {
+					var self = this;
+					K.ctrl(document, 13, function() {
+						self.sync();
+						K('form[name=example]')[0].submit();
+					});
+					K.ctrl(self.edit.doc, 13, function() {
+						self.sync();
+						K('form[name=example]')[0].submit();
+					});
+				}
+			});
+			prettyPrint();
+		});
+	</script>
+<include file="Common/header" />
+        <div id="page-wrapper">
+        <div class="graphs">
+	     <div class="xs">
+  	       <h3>发布公告</h3>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form">
+							<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">标题</label>
+									<div class="col-sm-8">
+										<input type="text" name="title"  value="{$res.title}" class="form-control1" id="focusedinput" placeholder="">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">类别</label>
+									<div class="col-sm-8">
+										<input type="text"  value="{$res.title}" class="form-control1" id="focusedinput" placeholder="" value="<if condition="$res.type eq 1"> 公司简介<elseif condition="$res.type eq 2"/>公司简介 </if>">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+
+								<!--<div class="form-group">-->
+									<!--<label for="focusedinput" class="col-sm-2 control-label">类别</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<div class="col-sm-8">-->
+											<!--<input type="text" name="" disabled="disabled"  value="<if condition="$res.type eq 1"> 公司简介<elseif condition="$res.type eq 2"/>公司简介 </if>" class="form-control1" id="focusedinput" placeholder="">-->
+										<!--</div>-->
+										<!--&lt;!&ndash;<select class="form-control1" name="type">&ndash;&gt;-->
+											<!--&lt;!&ndash;<option value="{$res.type}"><if condition="$res.type eq 1"> 公司简介<elseif condition="$res.type eq 2"/>公司简介 </if></option>&ndash;&gt;-->
+											<!--&lt;!&ndash;&lt;!&ndash;<option value="3">值班团队 </option>&ndash;&gt;&ndash;&gt;-->
+											<!--&lt;!&ndash;<option value="1">公司简介</option>&ndash;&gt;-->
+											<!--&lt;!&ndash;<option value="2">公司公告</option>&ndash;&gt;-->
+											<!--&lt;!&ndash;&lt;!&ndash;<option value="4">分析专家</option>&ndash;&gt;&ndash;&gt;-->
+										<!--&lt;!&ndash;</select>&ndash;&gt;-->
+									<!--</div>-->
+								<!--</div>-->
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">上传图片</label>
+									<div class="col-sm-8">
+										<input type="file" onchange="previewImage(this)" name="thumb"/>
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+								<br />
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">内容</label>
+									<div class="col-sm-8">
+										<textarea name="content1" style="width:700px;height:200px;visibility:hidden;"><?php echo htmlspecialchars($res['cont']); ?></textarea>
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+							      <div class="panel-footer">
+									<div class="row">
+										<div class="col-sm-8 col-sm-offset-2">
+											<button class="btn-success btn">Submit</button>
+										</div>
+									</div>
+								 </div>
+								
+								
+							</form>
+						</div>
+					</div>
+
+ 
+	
+  </div>
+  <div class="copy_layout">
+      <p>Copyright &copy; 2016 name All rights reserved.</p>
+  </div>
+  </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="__ROOT__/Public/admin/css/custom.css" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="__ROOT__/Public/admin/js/metisMenu.min.js"></script>
+<script src="__ROOT__/Public/admin/js/custom.js"></script>
+ <script src="__ROOT__/Public/admin/js/bootstrap.min.js"></script>
+</body>
+</html>
