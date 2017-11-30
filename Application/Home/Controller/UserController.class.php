@@ -5,6 +5,129 @@ use Think\Controller;
 header('content-type:text/html;charset=utf-8');
 class UserController extends CommonController{
 
+    public function isquan(){
+        $quannum = $_GET['num'];
+        $juan =M('quan')->where(array('cont'=>$quannum))->find();
+        if($juan['id']){
+            echo 1;
+        }else{
+            echo 0;
+        }
+
+    }
+
+    public function upgradeType(){
+
+        echo 1;
+    }
+
+    public function upgrade(){
+        $menber =M('menber');
+        $res_user =$menber->where(array('uid'=>session('uid')))->find();
+        $type =$this->chanefortype($res_user['type']+1);
+        $typemoney =$this->chaneformoney($res_user['type']+1);
+        $this->assign('typename',$type);
+        $this->assign('typemoney',$type);
+        $this->assign('typemoney',$typemoney);
+        $this->display();
+    }
+    public function workOrder(){
+        $this->display();
+    }
+
+    public function about(){
+        $this->display();
+    }
+
+    public function contact(){
+        $this->display();
+    }
+
+
+    private function chaneformoney($type){
+        if($type==1){
+            return "699";
+        }elseif($type==2){
+            return "1399";
+        }elseif($type==3){
+            return "1999";
+        }elseif($type==4){
+            return "2699";
+        }else{
+            return "未知";
+        }
+    }
+
+    private function chanefortype($type){
+        if($type==1){
+            return "普通";
+        }elseif($type==2){
+            return "高级";
+        }elseif($type==3){
+            return "豪华";
+        }elseif($type==4){
+            return "至尊";
+        }else{
+            return "未知";
+        }
+    }
+
+
+    public function payPwd(){
+        if($_POST['pwd'] &&$_POST['pwd2'] ){
+            $menber =M("menber");
+            $userinfo =$menber->where(array('uid'=>session('uid')))->find();
+            if ($userinfo['pwd2'] != $_POST['pwd']){
+                echo "<script>alert('当前密码错误');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/payPwd';";
+                echo "</script>";
+                exit;
+            }
+
+            if($_POST['pwd2'] != $_POST['pwd22'] ){
+                echo "<script>alert('前后密码不一致');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/payPwd';";
+                echo "</script>";
+                exit;
+            }
+            $menber->where(array('uid'=>session('uid')))->save(array('pwd2'=>$_POST['pwd2']));
+            echo "<script>alert('支付密码修改成功');";
+            echo "window.location.href='".__ROOT__."/index.php/Home/User/payPwd';";
+            echo "</script>";
+            exit;
+
+        }
+        $this->display();
+    }
+
+    public function loginPwd(){
+        if($_POST['pwd'] &&$_POST['pwd2'] ){
+            $menber =M("menber");
+            $userinfo =$menber->where(array('uid'=>session('uid')))->find();
+            if ($userinfo['pwd'] != $_POST['pwd']){
+                echo "<script>alert('当前密码错误');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/loginPwd';";
+                echo "</script>";
+                exit;
+            }
+
+            if($_POST['pwd2'] != $_POST['pwd22'] ){
+                echo "<script>alert('前后密码不一致');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/loginPwd';";
+                echo "</script>";
+                exit;
+            }
+            $menber->where(array('uid'=>session('uid')))->save(array('pwd'=>$_POST['pwd2']));
+            echo "<script>alert('登录密码修改成功');";
+            echo "window.location.href='".__ROOT__."/index.php/Home/User/loginPwd';";
+            echo "</script>";
+            exit;
+
+        }
+        $this->display();
+    }
+
+
     public function popularize(){
         $url = "http://".$_SERVER['SERVER_NAME']."/index.php/Home/Login/reg/fid/".session('uid').".html";
         $this->assign('url',$url);
@@ -244,11 +367,13 @@ class UserController extends CommonController{
         $this->display();
     }
 
-
+    public function recharge(){
+        $this->display();
+    }
     /*
      * 积分充值
      */
-    public function recharge(){
+    public function rechargedo(){
         $money = $_GET['money'];
         date_default_timezone_set('Asia/Shanghai');
         header("Content-type: text/html; charset=utf-8");
@@ -332,17 +457,33 @@ class UserController extends CommonController{
         $this->display();
     }
 
-
-
-
-    /*
-    * 静态   1收益 2充值 3静态提现  4动态体现  5 注册下级 6下单购买 7积分体现 8积分转账 9复投码转账 10分红收益 11 动态收益
-     */
-    public function sy_jing(){
+    public function rechargeDetail(){
         $incomelog =M('incomelog');
         $con['userid'] = session('uid');
-        $con['type']   =array('in',array(3,5,7,8,9,10,12));
-        $con['state']   =array('in',array(1,2,6));
+        $con['type']   =2;
+        $res = $incomelog->where($con)->order(" id DESC ")->limit(18)->select();
+        $this->assign('res',$res);
+        $this->display();
+    }
+
+
+    public function drawDetail(){
+        $incomelog =M('incomelog');
+        $con['userid'] = session('uid');
+        $con['type']   =7;
+        $res = $incomelog->where($con)->order(" id DESC ")->limit(18)->select();
+        $this->assign('res',$res);
+        $this->display();
+    }
+
+    /*
+    * z账单  1收益 2充值 3静态提现  4动态体现  5 注册下级 6下单购买 7积分体现 8积分转账 9复投码转账 10分红收益 11 动态收益
+     */
+    public function funds(){
+        $incomelog =M('incomelog');
+        $con['userid'] = session('uid');
+//        $con['type']   =array('in',array(3,5,7,8,9,10,12));
+        $con['state']   =array('in',array(1,2));
         $res = $incomelog->where($con)->order(" id DESC ")->limit(18)->select();
         $this->assign('res',$res);
         $this->display();

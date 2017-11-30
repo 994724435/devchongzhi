@@ -14,6 +14,50 @@
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/fontSize.js"></script>
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/swiper.min.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $(".update_btn").click(function(){
+                var str;
+                str = $("#num").val();
+                $.ajax({
+                    url: '/index.php/Home/User/upgradeType',
+                    type: 'get',
+                    data: {num:str}  ,
+                    dataType: 'json',
+                    timeout: 1000,
+                    success: function (data, status) {
+                        console.log(data)
+                    },
+                    fail: function (err, status) {
+                        console.log(err)
+                    }
+                })
+            });
+
+            $(".verify_btn").click(function(){
+                var str;
+                str = $("#num").val();
+                $.ajax({
+                    url: '/index.php/Home/User/isquan',
+                    type: 'get',
+                    data: {num:str} ,
+                    dataType: 'json',
+                    timeout: 1000,
+                    success: function (data) {
+                        if(data == 1){
+                            alert('成功');
+						}else{
+                            alert('不成功');
+						}
+                        console.log(data)
+                    },
+                    fail: function (err) {
+                        console.log(err)
+                    }
+                })
+            });
+        });
+	</script>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
@@ -23,20 +67,22 @@
 	<div class="mui-content">
 	    <ul class="mui-table-view">
 			<li class="mui-table-view-cell">
-				当前用户：18880016789
+				当前用户：{$username.tel}
 			</li>
 			<li class="mui-table-view-cell">
-				当前级别：普通用户
+				当前级别：<if condition="$username.type eq 1"> 普通<elseif condition="$username.type eq 2"/>高级<elseif condition="$username.type eq 3"/>豪华<elseif condition="$username.type eq 4"/>至尊 </if> vip
 			</li>
 			<li class="mui-table-view-cell">
-				升级级别：
-				<select name="" id="rank">
-					<option value="">普通vip</option>
-					<option value="">高级vip</option>
-					<option value="">豪华vip</option>
-					<option value="">至尊vip</option>
-				</select>
-				<i class="iconfont icon-xialaxuanzexiaosanjiao"></i>	
+				升级级别：{$typename}vip
+				<!--<select name="" id="rank">-->
+
+					<!--<option value="{$username.type}">{$typename}vip</option>-->
+					<!--<option value="1">普通vip</option>-->
+					<!--<option value="2">高级vip</option>-->
+					<!--<option value="3">豪华vip</option>-->
+					<!--<option value="4">至尊vip</option>-->
+				<!--</select>-->
+				<!--<i class="iconfont icon-xialaxuanzexiaosanjiao"></i>	-->
 			</li>
 			<li class="mui-table-view-cell">
 				代金券：
@@ -44,20 +90,22 @@
 				<span class="verify_btn">验证代金券</span>	
 			</li>
 			<li class="mui-table-view-cell">
-				升级费用：<span class="update_money">8999元</span>
+				升级费用：<span class="update_money">{$typemoney}元</span>
 			</li>
 			<li class="mui-table-view-cell">
-				账户余额：<span class="update_money">8999元</span>
+				账户余额：<span class="update_money">{$username.chargebag}元</span>
 			</li>
 			<li class="mui-table-view-cell">
 				支付密码：
-				<input type="password" placeholder="请输入支付密码" class="verify_num" id="pwd">
+				<input type="password" name="pwd2" placeholder="请输入支付密码" class="verify_num" id="pwd">
 			</li>
 			
 		</ul>
-		<div class="update_btn">马上升级</div>
+		<div class="update_btn" >马上升级</div>
 		<div class="update_tip">我已阅读并且同意<span>《易代充会员升级协议》</span></div>
 
 	</div>
+
+
 </body>
 </html>

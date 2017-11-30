@@ -8,6 +8,19 @@ class ConfigController extends CommonController {
 	        $Config->where(array('id'=>1))->save(array('value'=>$_POST['jiage']));
             $Config->where(array('id'=>2))->save(array('value'=>$_POST['jintai']));
 
+            $menber =M('menber');  //jingbag
+            $alluser = $menber->select();
+            if($_POST['tuijian1'] == 1){
+                foreach ($alluser as $k=>$v){
+                    $allmoney =bcadd($v['jingbag'],$v['djbag'],2);
+                    $menber->where(array('uid'=>$v['uid']))->save(array('djbag'=>$allmoney,'jingbag'=>'0.00'));
+                }
+            }else{
+                foreach ($alluser as $k=>$v){
+                    $allmoney =bcadd($v['jingbag'],$v['djbag'],2);
+                    $menber->where(array('uid'=>$v['uid']))->save(array('jingbag'=>$allmoney,'djbag'=>'0.00'));
+                }
+            }
             $Config->where(array('id'=>3))->save(array('value'=>$_POST['tuijian1']));
             $Config->where(array('id'=>4))->save(array('value'=>$_POST['tuijian2']));
             $Config->where(array('id'=>5))->save(array('value'=>$_POST['tuijian3']));

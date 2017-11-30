@@ -17,11 +17,12 @@
 		        <tr>
 		          <th>编号</th>
 					<th>名称</th>
-		          <th style="width: 300px">描述</th>
-		          <th>logo</th>
+					<th>来源</th>
+		          <!--<th style="width: 300px">描述</th>-->
+		          <th>图片</th>
 					<th>价格</th>
-					<th>每日收益</th>
-				  <th>每日出售量</th>
+
+				  <!--<th>每日出售量</th>-->
 					<th>状态</th>
 					<th>操作</th>
 		        </tr>
@@ -42,11 +43,12 @@
 		        
 		          <th scope="row">{$v.id}</th>
 				  <th>{$v.name}</th>
-		          <th style="width: 300px">{$v.cont}</th>
+				  <th><if condition="$v.type eq 1"> 空充商城<elseif condition="$v.type eq 2"/>积分商城 </if></th>
+		          <!--<th style="width: 300px">{$v.cont}</th>-->
 		          <th><img src="{$v.pic}" style="width: 100px;"></th>
 				  <th>{$v.price}</th>
-				  <th>{$v.daycome}</th>
-				  <th>{$v.daynum}</th>
+				  <!--<th>{$v.daycome}</th>-->
+				  <!--<th>{$v.daynum}</th>-->
 				   <th><if condition="$v.state eq 1">出售中<elseif condition="$v.state eq 2"/>已下架</if></th>
 				  <th><a href="__ROOT__/index.php/Admin/Index/editeproduct/id/{$v.id}">修改</a>|<if condition="$v.state eq 1"><a href="javascript:if(confirm('确认下架吗?'))window.location='__ROOT__/index.php/Admin/Index/deleteproduct/id/{$v.id}'">下 架</a><elseif condition="$v.state eq 2"/><a href="javascript:if(confirm('确认上架吗?'))window.location='__ROOT__/index.php/Admin/Index/deleteproduct/id/{$v.id}'">上 架</a></if> </th>
 		        </tr>

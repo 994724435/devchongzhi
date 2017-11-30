@@ -7,17 +7,17 @@ class LoginController extends Controller{
     public function login(){
         session('uid',0);
         if($_POST){
-            if($_POST['number']!=$_POST['numbers']){
-//                header("Content-Type:text/html; charset=utf-8");
-//                exit('验证码错误'.'[ <A HREF="javascript:history.back()">返 回</A> ]');
-
-                echo "<script>alert('验证码错误');</script>";
-//                $this->display();
-//                exit();
-                echo "<script>window.location.href='".__ROOT__."/index.php/Home/Login/login';</script>";
-            }
+//            if($_POST['number']!=$_POST['numbers']){
+////                header("Content-Type:text/html; charset=utf-8");
+////                exit('验证码错误'.'[ <A HREF="javascript:history.back()">返 回</A> ]');
+//
+//                echo "<script>alert('验证码错误');</script>";
+////                $this->display();
+////                exit();
+//                echo "<script>window.location.href='".__ROOT__."/index.php/Home/Login/login';</script>";
+//            }
             $menber =M('menber');
-            $res = $menber->where(array('tel'=>$_POST['tel']))->select();
+            $res = $menber->where(array('name'=>$_POST['tel']))->select();
             if($res[0]['pwd']==$_POST['pwd']){
                 session_start();
                 session('name',$_POST['name']);
@@ -52,14 +52,14 @@ class LoginController extends Controller{
                 }
             }
             if($_POST['pwd']!=$_POST['pwd11']){
-                echo "<script>alert('一级密码不一致');";
+                echo "<script>alert('登录密码不一致');";
                 echo "window.location.href='".__ROOT__."/index.php/Home/Login/reg';";
                 echo "</script>";
                 exit;
             }
 
             if($_POST['pwd2']!=$_POST['pwd22']){
-                echo "<script>alert('二级密码不一致');";
+                echo "<script>alert('支付密码不一致');";
                 echo "window.location.href='".__ROOT__."/index.php/Home/Login/reg';";
                 echo "</script>";
                 exit;

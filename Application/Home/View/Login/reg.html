@@ -13,6 +13,32 @@
   <style type="text/css">
     .goLogin{float: right;color: #333;}
   </style>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $("#getTelCode").click(function(){
+              var str;
+              str = $("#num").val();
+              $.ajax({
+                  url: '/index.php/Home/User/isquan',
+                  type: 'get',
+                  data: {num:str} ,
+                  dataType: 'json',
+                  timeout: 1000,
+                  success: function (data) {
+                      if(data == 1){
+                          alert('成功');
+                      }else{
+                          alert('不成功');
+                      }
+                      console.log(data)
+                  },
+                  fail: function (err) {
+                      console.log(err)
+                  }
+              })
+          });
+      });
+  </script>
 </head>
 <body>
 <!--header 开始-->
@@ -26,30 +52,30 @@
     <div class="main">
       <form id="frm_login" method="post" action="">
         <div class="item item-username">
-          <input class="txt-input txt-username" type="text" placeholder="账号" value="">
+          <input class="txt-input txt-username" name="name" type="text" placeholder="账号" value="">
         </div>
         <div class="item item-username">
-          <input class="txt-input txt-username" type="password" placeholder="密码" value="">
-        </div>
-
-        <div class="item item-username">
-          <input class="txt-input txt-username" type="password" placeholder="确认密码" value="">
-        </div>
-        <div class="item item-username">
-          <input class="txt-input txt-username" type="password" placeholder="支付密码" value="">
+          <input class="txt-input txt-username" name="pwd" type="password" placeholder="密码" value="">
         </div>
 
         <div class="item item-username">
-          <input class="txt-input txt-username" type="password" placeholder="确认支付密码" value="">
+          <input class="txt-input txt-username"  name="pwd11" type="password" placeholder="确认密码" value="">
+        </div>
+        <div class="item item-username">
+          <input class="txt-input txt-username" name="pwd2" type="password" placeholder="支付密码" value="">
         </div>
 
         <div class="item item-username">
-          <input class="txt-input txt-username" type="number" placeholder="手机"  id="tel">
+          <input class="txt-input txt-username" name="pwd22" type="password" placeholder="确认支付密码" value="">
+        </div>
+
+        <div class="item item-username">
+          <input class="txt-input txt-username" name="tel" type="number" placeholder="手机"  id="tel">
         </div>
 
         <div class="item item-captcha">
           <div class="input-info">
-            <input id="validateCode" class="txt-input txt-captcha" type="text" placeholder="手机验证码">
+            <input id="validateCode" name="yzm" class="txt-input txt-captcha" type="text" placeholder="手机验证码">
             <b class="input-close" style="display: block;"></b> <button class="captcha-img" id="getTelCode" type="button">获取验证码 </button> </div>
         </div>
 

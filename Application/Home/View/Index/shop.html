@@ -22,36 +22,18 @@
 	</header>
 	<div class="mui-content">
 		<ul class="list">
+			<foreach name="pro" item='v'>
 			<li>
 			    <a href="javascript:void(0);">
-					<img src="__ROOT__/Public/Home/img/shuzi_01.jpg" class="img">
+					<img src="{$v.pic}" class="img">
 					<ul>
-						<li>精品木梳</li>
+						<li>{$v.name}</li>
 					</ul>
-					<span>¥100</span>
-					<a href="#" class="buy_a">购买</a>
+					<span>¥{$v.price}</span>
+					<a href="/index.php/Home/Index/buyproduct/id/{$v.id}" class="buy_a">购买</a>
 				</a>
 			</li>
-			<li>
-			    <a href="javascript:void(0);">
-					<img src="__ROOT__/Public/Home/img/shuzi_01.jpg" class="img">
-					<ul>
-						<li>精品木梳</li>
-					</ul>
-					<span>¥100</span>
-					<a href="#" class="buy_a">购买</a>
-				</a>
-			</li>
-			<li>
-			    <a href="javascript:void(0);">
-					<img src="__ROOT__/Public/Home/img/shuzi_01.jpg" class="img">
-					<ul>
-						<li>精品木梳</li>
-					</ul>
-					<span>¥100</span>
-					<a href="#" class="buy_a">购买</a>
-				</a>
-			</li>
+			</foreach>
 		</ul>
 	</div>
 </body>

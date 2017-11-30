@@ -5,7 +5,7 @@ class CommonController extends Controller {
 	public function _initialize(){
 		$function = explode('/',__ACTION__);
 		$curfunction =$function[count($function)-1];
-		session('uid',35);
+//		session('uid',1);
 		if(!session('uid')){
 			echo "<script>";
 			echo "window.location.href='".__ROOT__."/index.php/Home/Login/login';";
@@ -21,6 +21,9 @@ class CommonController extends Controller {
             exit;
         }
 //		$this->assign('function',$this->getfunction($curfunction));
+        $one = bcadd($res_user[0]['djbag'],$res_user[0]['jingbag'],2);
+		$alls = bcadd($one,$res_user[0]['chargebag'],2);
+        $this->assign('alls',$alls);
 		$this->assign('username',$res_user[0]);
 //		$this->assign('usertype',$this->chanefortype($res_user[0]['type']));
 	}
@@ -39,19 +42,7 @@ class CommonController extends Controller {
 		}
 	}
 
-	private function chanefortype($type){
-		if($type==1){
-			return "普卡会员";
-		}elseif($type==2){
-			return "银卡会员";
-		}elseif($type==3){
-			return "金卡会员";
-		}elseif($type==4){
-			return "钻卡会员";
-		}else{
-			return "未知";
-		}
-	}
+
 
 	/**
 	 * 获取当前页面完整URL地址

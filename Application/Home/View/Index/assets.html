@@ -22,40 +22,40 @@
 	<div class="mui-content">
 		<ul class="eable_money">
 			<li>当前可用余额</li>
-			<li>7892元</li>
+			<li>{$username.chargebag}元</li>
 		</ul>
 		<ul class="bottom_ul">
 			<li class="bottom_li">
 				<ul>
 					<li>智能充余额(元)</li>
-					<li>334.8元</li>
+					<li>{$username.jingbag}元</li>
 				</ul>
 			</li>
 			<li class="bottom_li">
 				<ul>
 					<li>冻结资产(元)</li>
-					<li>334.8元</li>
+					<li>{$username.djbag}</li>
 				</ul>
 			</li>
 		</ul>
 	</div>
 	<div class="grade">
-		当前级别：<span>至尊vip</span>
+		当前级别：<span><if condition="$username.type eq 1"> 普通<elseif condition="$username.type eq 2"/>高级<elseif condition="$username.type eq 3"/>豪华<elseif condition="$username.type eq 4"/>至尊 </if> vip</span>
 	</div>
 	<ul class="money_ul">
 		<li class="money_title">累计收入</li>
-		<li class="money">4990.0元</li>
-		<li class="money_tip">智能充收入金额：200元</li>
+		<li class="money">{$incomes}元</li>
+		<li class="money_tip">智能充收入金额：{$incomes}元</li>
 	</ul>
 	<ul class="money_ul">
 		<li class="money_title">总资产</li>
-		<li class="money">4990.0元</li>
-		<li class="money_tip">智能充可用金额：200元</li>
-		<li class="money_tip">智能充冻结金额：200元</li>
+		<li class="money">{$alls}元</li>
+		<li class="money_tip">智能充可用金额：{$username.jingbag}元</li>
+		<li class="money_tip">智能充冻结金额：{$username.djbag}元</li>
 	</ul>
     <ul class="revolution">
-    	<li>转出</li>
-    	<li>转入</li>
+		<li><a href="/index.php/Home/Index/assetsout">转出</a></li>
+    	<li><a href="/index.php/Home/Index/assetsin">转入</a></li>
     </ul>
 
 </body>

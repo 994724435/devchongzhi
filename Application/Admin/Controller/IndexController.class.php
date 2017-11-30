@@ -51,6 +51,7 @@ class IndexController extends CommonController {
                 }
             }
             $data['name'] =$_POST['name'];
+            $data['type'] =$_POST['type'];
             $data['cont'] =$_POST['cont'];
             $data['pic'] =__ROOT__.$pic;
             $data['price'] =$_POST['price'];
@@ -63,7 +64,7 @@ class IndexController extends CommonController {
             $product =M('product');
             $result = $product->add($data);
             if($result){
-                echo "<script>window.location.href = '".__ROOT__."/index.php/Admin/Index/addproduct';</script>";
+                echo "<script>window.location.href = '".__ROOT__."/index.php/Admin/Index/productlist';</script>";
             }else{
                 echo "<script>alert('添加失败');window.location.href = '".__ROOT__."/index.php/Admin/Index/addproduct';</script>";
             }
@@ -97,6 +98,7 @@ class IndexController extends CommonController {
                 }
             }
             $data['name'] =$_POST['name'];
+            $data['type'] =$_POST['type'];
             $data['cont'] =$_POST['cont'];
             if($pic){
                 $data['pic'] =$pic;

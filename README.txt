@@ -2,7 +2,12 @@
 高级vip  1399
 豪华vip  1999
 至尊vip  2699
+
 按100的基准分红0.1元
+
+10 0.01
+
+1   0.001
 
 如普通VIP升级高级只需补差价即可
 
@@ -10,7 +15,12 @@
 
 当用户升级高级之后 显示不出豪华的级别选项 只有至尊
 
-
+$(document).ready(function(){
+$("#b01").click(function(){
+htmlobj=$.ajax({url:"/jquery/test1.txt",async:false});
+$("#myDiv").html(htmlobj.responseText);
+});
+});
 
 
 
