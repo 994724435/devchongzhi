@@ -1,0 +1,76 @@
+
+
+
+<include file="Common/header" />
+           
+        
+        <div id="page-wrapper">
+        <div class="graphs">	  
+    <div class="content_bottom">
+     <div class="col-md-12 span_3">
+		  <div class="bs-example1" data-example-id="contextual-table">
+		    <table class="table">
+		      <thead>
+		        <tr style="text-align: center;">
+		           <h3> <span><a href="__ROOT__/index.php/Admin/Work/addproduct">添加工单</a></h3>
+		        </tr>
+		        <tr>
+		          <th>编号</th>
+					<th>用户id</th>
+					<th>账号</th>
+					<th>金额</th>
+		          <!--<th style="width: 300px">描述</th>-->
+		          <th>时间</th>
+					<!--<th>价格</th>-->
+
+				  <!--<th>每日出售量</th>-->
+					<th>状态</th>
+					<!--<th>操作</th>-->
+		        </tr>
+		      </thead>
+		      <tbody>	      
+		      <?php 
+		      		$i = 1;
+		      	?>
+		      <foreach name="res" item='v'>
+		      
+		      	<?php 
+		      		if(($i%2)==1){
+						echo "<tr class='active'>";
+					}else{
+						echo "<tr class='info'>";
+					}
+		      	?>
+		        
+		          <th scope="row">{$v.id}</th>
+				  <th>{$v.userid}</th>
+				  <th>{$v.tel}</th>
+				  <!--<th><if condition="$v.type eq 1"> 空充商城<elseif condition="$v.type eq 2"/>积分商城 </if></th>-->
+		          <!--<th style="width: 300px">{$v.cont}</th>-->
+		          <!--<th><img src="{$v.pic}" style="width: 100px;"></th>-->
+				  <th>{$v.income}</th>
+				  <!--<th>{$v.daycome}</th>-->
+				  <th>{$v.addymd}</th>
+				   <th><if condition="$v.state eq 1">收入<elseif condition="$v.state eq 2"/>支出</if></th>
+				  <!--<th><if condition="$v.state eq 1"><a href="javascript:if(confirm('确认失效吗?'))window.location='__ROOT__/index.php/Admin/Quan/deleteproduct/id/{$v.id}'">失 效</a><else/>无</if> </th>-->
+		        </tr>
+		      	<?php $i++ ;?>
+		       </foreach>		      
+		      </tbody>
+		    </table>
+		   </div>
+	   </div>
+		<div class="clearfix"> </div>
+	    </div>
+		<div class="copy">
+            <p>Copyright &copy; 2016  All rights reserved.</p>
+	    </div>
+		</div>
+       </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__ROOT__/Public/admin/js/bootstrap.min.js"></script>
+</body>
+</html>

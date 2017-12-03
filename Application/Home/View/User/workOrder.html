@@ -13,6 +13,17 @@
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/aui.js"></script>
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/fontSize.js"></script>
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/swiper.min.js"></script>
+	<style type="text/css">
+		.bills_list{height: .96rem;overflow: hidden;border-bottom: 1px solid #eee;background: #fff;padding:.1re 0 .1rem 0;box-sizing: content-box;}
+		.bills_list .fl{height: .96rem;padding-left: .1rem;}
+		.bills_list .fr{height: .96rem;padding-right: .1rem;}
+		.bills_list .fl li:first-child{font-size: .33rem;color: #333;}
+		.bills_list .fl li span{background: #41ae86;border-radius: .1rem;color: #fff;font-size: .26rem;margin-left: .07rem;padding: 0 .05rem;}
+		.bills_list .fr li:first-child{font-size: .33rem;color: #333;}
+		.bills_list .fl li:last-child{font-size: .26rem;color: #41ae86;}
+		.bills_list .fr li:last-child{font-size: .28rem;color: #333;}
+		.bills_list .fr li:last-child span{font-size: .26rem;color: #c8505a;}
+	</style>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
@@ -20,18 +31,21 @@
 	  <h1 class="mui-title">我的工单</h1>
 	</header>
 	<div class="mui-content">
-	    <table class="my_group_table">
-	    	<tr>
-	    		<th>事件</th>
-	    		<th>金额</th>
-	    		<th>时间</th>
-	    	</tr>
-	    	<tr>
-	    		<td>利息</td>
-	    		<td>+2000</td>
-	    		<td>12-12 12:00:00</td>
-	    	</tr>
-	    </table>
+		<ul>
+		<foreach name="res" item='v'>
+		<li class="bills_list">
+		<ul class="fl">
+		<li>{$v.addtime}<span>成功</span></li>
+		<li><if condition="$v.state eq 1"> +<elseif condition="$v.state eq 2"/>- </if>{$v.income}元</li>
+		</ul>
+		<ul class="fr">
+		<li><?php echo date("m-d H:i:s",$v['addtime']); ?></li>
+		<!-- <li><if condition="$v.state eq 1">盈利：<elseif condition="$v.state eq 2"/>减少：</if>	<span>  {$v.income}元</span></li>	 -->
+		<li><if condition="$v.state eq 1"> 盈利：<elseif condition="$v.state eq 2"/>减少： </if><span>{$v.income}元</span></li>
+		</ul>
+		</li>
+		</foreach>
+		</ul>
 	</div>
 </body>
 </html>

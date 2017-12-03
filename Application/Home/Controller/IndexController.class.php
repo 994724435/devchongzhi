@@ -4,8 +4,80 @@ use Think\Controller;
 header('content-type:text/html;charset=utf-8');
 class IndexController extends CommonController {
 
+    public function telCharge(){
+        if($_POST['tel']){
+            $appkey ='90b0b7d6589571ae32f7cef0e91de4e6';
+            $isurl ="http://op.juhe.cn/ofpay/mobile/telcheck?cardnum=".$_POST['number']."&phoneno=".$_POST['tel']."&key=$appkey";
+            $iscanchong =$this->curlget($isurl);
+            if($iscanchong['error_code'] != 0){
+                $errmsg =$iscanchong['reason'];
+                echo "<script>alert('".$errmsg."');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/Index/telCharge.html';";
+                echo "</script>";
+                exit;
+            }
+
+            $member = M("menber");
+            $userinfo =$member->where(array('uid'=>session('uid')))->find();
+            if($userinfo['chargebag'] < $_POST['number']){
+                $errmsg ="当前余额不足";
+                echo "<script>alert('".$errmsg."');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/Index/telCharge.html';";
+                echo "</script>";
+                exit;
+            }
+
+            if($userinfo['pwd2'] != $_POST['pwd2']){
+                $errmsg ="充值密码错误";
+                echo "<script>alert('".$errmsg."');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/Index/telCharge.html';";
+                echo "</script>";
+                exit;
+            }
+
+            $tel =$_POST['tel'];
+            $number =$_POST['number'];
+            $times =time();
+            $str ='JH4afc38ae575792b6bf3845455a1238e5'.$appkey.$_POST['tel'].$_POST['number'].$times;
+            $sign =md5($str);
+            $geturl='http://op.juhe.cn/ofpay/mobile/onlineorder?'."phoneno=$tel&cardnum=$number&orderid=$times&sign=$sign&key=$appkey";
+
+            $res_curl =$this->curlget($geturl);
+            if($res_curl['error_code'] ==0){
+                $data['type'] =8;
+                $data['state'] =2;
+                $data['reson'] ='话费充值';
+                $data['addymd'] =date('Y-m-d',time());
+                $data['addtime'] =$times;
+                $data['orderid'] =$times;
+                $data['tel'] =$tel;
+                $data['userid'] =session('uid');
+                $data['income'] =$number;
+                M('incomelog')->add($data);
+                $chargemoney =bcsub($userinfo['chargebag'],$_POST['number'],2);
+                $member->where(array('uid'=>session('uid')))->save(array('chargebag'=>$chargemoney));
+                $errmsg ="充值成功";
+                echo "<script>alert('".$errmsg."');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/Index/telCharge.html';";
+                echo "</script>";
+                exit;
+            }else{
+                $errmsg =$res_curl['reason'];
+                echo "<script>alert('".$errmsg."');";
+                echo "window.location.href='".__ROOT__."/index.php/Home/Index/telCharge.html';";
+                echo "</script>";
+                exit;
+            }
+
+        }
+        $this->display();
+    }
+
+
+
     public function  assets(){
         $pro = M('incomelog')->where(array('userid'=>session('uid'),'type'=>1))->sum('income');
+        $pro = bcadd($pro,0,2);
         $this->assign('incomes',$pro);
         $this->display();
     }

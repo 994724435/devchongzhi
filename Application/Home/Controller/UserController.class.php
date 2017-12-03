@@ -6,9 +6,12 @@ header('content-type:text/html;charset=utf-8');
 class UserController extends CommonController{
 
     public function isquan(){
-        $quannum = $_GET['num'];
+        $quannum = trim($_GET['num']);
         $juan =M('quan')->where(array('cont'=>$quannum))->find();
         if($juan['id']){
+            if($juan['state'] != 1){
+                echo 2;exit();
+            }
             echo 1;
         }else{
             echo 0;
@@ -16,8 +19,65 @@ class UserController extends CommonController{
 
     }
 
-    public function upgradeType(){
+    public function upgradeType(){ // 1 成功 2密码不对 3金额错误 4余额不足 5最高会员 6升级类型错误
+        $menber =M('menber');
+        $res_user =$menber->where(array('uid'=>session('uid')))->find();
+        if($_GET['pwd'] !=$res_user['pwd2']){
+            echo 2;exit();
+        }
 
+
+
+        if($res_user['type'] == 4){
+            echo 5;exit();
+        }
+
+        $quannum = trim($_GET['num']);
+        $juan =M('quan')->where(array('cont'=>$quannum))->find();
+        $price = 0;
+        if($juan['state'] == 1){
+            $price =$juan['price'];
+        }
+
+        if($_GET['rank'] <=$res_user['type']){
+            echo 6;exit();
+        }
+
+
+        // 处理金额
+        $noewmoney = $this->chaneformoney($res_user['type']);
+        $aftermoney =$this->chaneformoney($_GET['rank']);
+        $_GET['needmoney'] =$aftermoney - $noewmoney;
+        if($_GET['needmoney'] < 300){
+            echo 3;exit();
+        }
+
+        $income =M('incomelog');
+        $data1['type'] =4;
+        $data1['state'] =2;
+        $data1['reson'] ='会员升级';
+        $data1['addymd'] =date('Y-m-d',time());
+        $data1['addtime'] =time();
+        $data1['userid'] =session('uid');
+        $data1['income'] =$_GET['needmoney'];
+        $type =$res_user['type']+1;
+        if($juan['price'] == $_GET['needmoney']){
+            $menber->where(array('uid'=>session('uid')))->save(array('type'=>$type));
+            $data1['reson'] ='会员升级(代金券)';
+            $income->add($data1);
+            M('quan')->where(array('cont'=>$quannum))->save(array('state'=>2));
+            echo 1;exit();
+        }else{
+            $nextneed =bcsub($_GET['needmoney'],$price,2);
+            if($res_user['chargebag'] < $nextneed){
+                echo 4;exit();
+            }
+            if($juan['state'] == 1){
+                M('quan')->where(array('cont'=>$quannum))->save(array('state'=>2));
+            }
+            $chargebag =bcsub($res_user['chargebag'],$nextneed,2);
+            $menber->where(array('uid'=>session('uid')))->save(array('type'=>$type,'chargebag'=>$chargebag));
+        }
         echo 1;
     }
 
@@ -26,12 +86,27 @@ class UserController extends CommonController{
         $res_user =$menber->where(array('uid'=>session('uid')))->find();
         $type =$this->chanefortype($res_user['type']+1);
         $typemoney =$this->chaneformoney($res_user['type']+1);
+
+        // 处理金额
+        $noewmoney = $this->chaneformoney($res_user['type']);
+
+        $typemoney= $typemoney - $noewmoney;
+        if($typemoney < 0){
+            $typemoney = 0;
+        }
+
         $this->assign('typename',$type);
-        $this->assign('typemoney',$type);
         $this->assign('typemoney',$typemoney);
         $this->display();
     }
     public function workOrder(){
+        $incomelog =M('incomelog');
+        $con['userid'] = session('uid');
+        $con['type']   =11;
+        $con['state']   =array('in',array(1,2));
+        $res = $incomelog->where($con)->order(" id DESC ")->limit(18)->select();
+
+        $this->assign('res',$res);
         $this->display();
     }
 
@@ -54,7 +129,7 @@ class UserController extends CommonController{
         }elseif($type==4){
             return "2699";
         }else{
-            return "未知";
+            return "暂无";
         }
     }
 
@@ -68,7 +143,7 @@ class UserController extends CommonController{
         }elseif($type==4){
             return "至尊";
         }else{
-            return "未知";
+            return "至尊";
         }
     }
 
@@ -477,12 +552,12 @@ class UserController extends CommonController{
     }
 
     /*
-    * z账单  1收益 2充值 3静态提现  4动态体现  5 注册下级 6下单购买 7积分体现 8积分转账 9复投码转账 10分红收益 11 动态收益
+    * z账单 1分红收益2充值 3静态提现  4升级  5 注册下级 6下单购买 7积分体现 8话费充值 9 回馈奖 10积分商城购买
      */
     public function funds(){
         $incomelog =M('incomelog');
         $con['userid'] = session('uid');
-//        $con['type']   =array('in',array(3,5,7,8,9,10,12));
+        $con['type']   =array('in',array(1,2,4,5,6,7,8,9,10));
         $con['state']   =array('in',array(1,2));
         $res = $incomelog->where($con)->order(" id DESC ")->limit(18)->select();
         $this->assign('res',$res);
@@ -578,7 +653,7 @@ class UserController extends CommonController{
                 $order['userid'] =session('uid');
                 $order['productid'] =1 ;
                 $order['productname'] ="复投码";
-                $order['productmoney'] = $bi;
+                $order['productmoney'] = 0;
                 $order['states'] = 1;
                 $order['orderid'] = $_POST['num'];
                 $order['addtime'] = time();
@@ -606,7 +681,7 @@ class UserController extends CommonController{
             }
         }
         $this->assign('count',$count);
-        $this->assign('config',$config[0]);
+//        $this->assign('config',$config[0]);
         $this->display();
     }
 

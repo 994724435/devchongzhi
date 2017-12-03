@@ -44,7 +44,7 @@
 				  <th>支付状态</th>
 					<th>产品价格</th>
 					<th>操作</th>
-					<th>地址，姓名，电话，邮编</th>
+					<!--<th>地址，姓名，电话，邮编</th>-->
 		        </tr>
 		      </thead>
 		      <tbody>	      
@@ -67,7 +67,7 @@
 				  <th><if condition="$v.state eq 0"> 待支付<elseif condition="$v.state eq 1"/>已购买<elseif condition="$v.state eq 2"/>已发货</if></th>
 				  <th>{$v.price}</th>
 				  <th><if condition="$v.state eq 1"><a href="__ROOT__/index.php/Admin/Index/comproduct/id/{$v.logid}">发货</a><elseif condition="$v.state eq 2"/>已发货</if></if></th>
-				  <th>{$v.option}</th>
+				  <!--<th>{$v.option}</th>-->
 			  </tr>
 		      	<?php $i++ ;?>
 		       </foreach>		      

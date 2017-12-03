@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<include file="Common/header" />
+        <div id="page-wrapper">
+        <div class="graphs">
+	     <div class="xs">
+  	       <h3>产品修改</h3>
+  	         <div class="tab-content">
+						<div class="tab-pane active" id="horizontal-form">
+							<form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">产品名</label>
+									<div class="col-sm-8">
+										<input type="text" name="name" value="{$res.name}" class="form-control1" id="focusedinput" placeholder="">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">来源</label>
+									<div class="col-sm-8">
+										<select class="form-control1" name="type">
+											<option value="{$res.type}"><if condition="$res.type eq 1"> 空充商城<elseif condition="$res.type eq 2"/>积分商城 </if></option>
+											<option value="1">空充商城</option>
+											<option value="2">积分商城</option>
+										</select>
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+								<!--<div class="form-group">-->
+									<!--<label for="focusedinput" class="col-sm-2 control-label">产品描述</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input type="text" name="cont" value="{$res.cont}" class="form-control1" id="focusedinput" placeholder="" style="height: 80px;">-->
+									<!--</div>-->
+									<!--<div class="col-sm-2">-->
+										<!--<p class="help-block"></p>-->
+									<!--</div>-->
+								<!--</div>-->
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">产品图片</label>
+									<div class="col-sm-8">
+										<input type="text" name="pic" value="{$res.pic}" class="form-control1" id="focusedinput" placeholder="">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">产品图片</label>
+									<div class="col-sm-8">
+										<img src="{$res.pic}" alt="" style="width: 200px">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">上传图片</label>
+									<div class="col-sm-8">
+										<input type="file" onchange="previewImage(this)" name="thumb"/>
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label for="focusedinput" class="col-sm-2 control-label">售卖价格（元）</label>
+									<div class="col-sm-8">
+										<input type="number" name="price" value="{$res.price}" class="form-control1" id="focusedinput" placeholder="">
+									</div>
+									<div class="col-sm-2">
+										<p class="help-block"></p>
+									</div>
+								</div>
+
+								<!--<div class="form-group">-->
+									<!--<label for="focusedinput" class="col-sm-2 control-label">理财有效天数（天）</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input type="number" name="effectdays" value="{$res.effectdays}" class="form-control1" id="focusedinput" placeholder="">-->
+									<!--</div>-->
+									<!--<div class="col-sm-2">-->
+										<!--<p class="help-block"></p>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<div class="form-group">-->
+									<!--<label for="focusedinput" class="col-sm-2 control-label">理财每日收益（元）</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input type="number" name="daycome" value="{$res.daycome}" class="form-control1" id="focusedinput" placeholder="">-->
+									<!--</div>-->
+									<!--<div class="col-sm-2">-->
+										<!--<p class="help-block"></p>-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="form-group">-->
+									<!--<label for="focusedinput" class="col-sm-2 control-label">每日发放数量</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input type="number" name="daynum" value="{$res.daynum}" class="form-control1" id="focusedinput" placeholder="">-->
+									<!--</div>-->
+									<!--<div class="col-sm-2">-->
+										<!--<p class="help-block"></p>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<div class="form-group">-->
+									<!--<label for="focusedinput" class="col-sm-2 control-label">一代每日返利（%）</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input type="text" name="one" value="{$res.one}" class="form-control1" id="focusedinput" placeholder="">-->
+									<!--</div>-->
+									<!--<div class="col-sm-2">-->
+										<!--<p class="help-block"></p>-->
+									<!--</div>-->
+								<!--</div>-->
+
+								<!--<div class="form-group">-->
+									<!--<label for="focusedinput" class="col-sm-2 control-label">二代每日返利（%）</label>-->
+									<!--<div class="col-sm-8">-->
+										<!--<input type="text" name="two" value="{$res.two}" class="form-control1" id="focusedinput" placeholder="">-->
+									<!--</div>-->
+									<!--<div class="col-sm-2">-->
+										<!--<p class="help-block"></p>-->
+									<!--</div>-->
+								<!--</div>-->
+							      <div class="panel-footer">
+									<div class="row">
+										<div class="col-sm-8 col-sm-offset-2">
+											<button class="btn-success btn">Submit</button>
+										</div>
+									</div>
+								 </div>
+								
+								
+							</form>
+						</div>
+					</div>
+
+ 
+	
+  </div>
+  <div class="copy_layout">
+      <p>Copyright &copy; 2016 name All rights reserved.</p>
+  </div>
+  </div>
+      </div>
+      <!-- /#page-wrapper -->
+   </div>
+    <!-- /#wrapper -->
+<!-- Nav CSS -->
+<link href="__ROOT__/Public/admin/css/custom.css" rel="stylesheet">
+<!-- Metis Menu Plugin JavaScript -->
+<script src="__ROOT__/Public/admin/js/metisMenu.min.js"></script>
+<script src="__ROOT__/Public/admin/js/custom.js"></script>
+ <script src="__ROOT__/Public/admin/js/bootstrap.min.js"></script>
+</body>
+</html>

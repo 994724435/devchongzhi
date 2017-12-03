@@ -20,20 +20,28 @@
 	  <h1 class="mui-title">话费充值</h1>
 	</header>
 	<div class="mui-content">
-	    <form class="mui-input-group">
-	    	<div class="myPoint">我的积分：<span>2333分</span></div>
+	    <form class="mui-input-group" action="" method="post">
+	    	<div class="myPoint">我的积分：<span>{$username.dongbag}分</span></div>
 	    	
 		    <div class="mui-input-row">
 		        <label>手机号</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入手机号" id="tel" name="">
+		        <input type="number" value="{$username.tel}" class="mui-input-clear" placeholder="请输入手机号" id="tel" name="tel">
 		    </div>
 		    <div class="mui-input-row">
 		        <label>充值金额</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入充值金额" id="num" name="">
+		        <!--<input type="number" class="mui-input-clear" placeholder="请输入充值金额" id="num" name="num">-->
+				<select name="number" >
+				<option value="10">10</option>
+				<option value="20">20</option>
+				<option value="30">30</option>
+				<option value="50">50</option>
+				<option value="100">100</option>
+				<option value="500">500</option>
+				</select>
 		    </div>
 		    <div class="mui-input-row">
 		        <label>支付密码</label>
-		        <input type="password" class="mui-input-password" placeholder="请输入支付密码" id="pwd1" name="">
+		        <input type="password"  class="mui-input-password" placeholder="请输入支付密码" id="pwd1" name="pwd2">
 		    </div>
 		   
 			<button class="mui-btn mui-btn-block" id="submit">确认充值</button>

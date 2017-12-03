@@ -9,55 +9,13 @@
 	<link rel="stylesheet" href="__ROOT__/Public/Home/css/aui.min.css">
 	<link rel="stylesheet" type="text/css" href="http://at.alicdn.com/t/font_487606_g87cvzc6ue9rizfr.css">
 	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/swiper.min.css">
+	<script type="text/javascript" src="__ROOT__/Public/Home/js/layer/layer.js"></script>
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/aui.js"></script>
 	<link rel="stylesheet" type="text/css" href="__ROOT__/Public/Home/css/style.css">
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/jquery-3.1.1.min.js"></script>
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/fontSize.js"></script>
 	<script type="text/javascript" src="__ROOT__/Public/Home/js/swiper.min.js"></script>
-	<script type="text/javascript">
-        $(document).ready(function(){
-            $(".update_btn").click(function(){
-                var str;
-                str = $("#num").val();
-                $.ajax({
-                    url: '/index.php/Home/User/upgradeType',
-                    type: 'get',
-                    data: {num:str}  ,
-                    dataType: 'json',
-                    timeout: 1000,
-                    success: function (data, status) {
-                        console.log(data)
-                    },
-                    fail: function (err, status) {
-                        console.log(err)
-                    }
-                })
-            });
 
-            $(".verify_btn").click(function(){
-                var str;
-                str = $("#num").val();
-                $.ajax({
-                    url: '/index.php/Home/User/isquan',
-                    type: 'get',
-                    data: {num:str} ,
-                    dataType: 'json',
-                    timeout: 1000,
-                    success: function (data) {
-                        if(data == 1){
-                            alert('成功');
-						}else{
-                            alert('不成功');
-						}
-                        console.log(data)
-                    },
-                    fail: function (err) {
-                        console.log(err)
-                    }
-                })
-            });
-        });
-	</script>
 </head>
 <body>
 	<header class="mui-bar mui-bar-nav">
@@ -73,16 +31,17 @@
 				当前级别：<if condition="$username.type eq 1"> 普通<elseif condition="$username.type eq 2"/>高级<elseif condition="$username.type eq 3"/>豪华<elseif condition="$username.type eq 4"/>至尊 </if> vip
 			</li>
 			<li class="mui-table-view-cell">
-				升级级别：{$typename}vip
-				<!--<select name="" id="rank">-->
-
-					<!--<option value="{$username.type}">{$typename}vip</option>-->
-					<!--<option value="1">普通vip</option>-->
-					<!--<option value="2">高级vip</option>-->
-					<!--<option value="3">豪华vip</option>-->
-					<!--<option value="4">至尊vip</option>-->
-				<!--</select>-->
-				<!--<i class="iconfont icon-xialaxuanzexiaosanjiao"></i>	-->
+				升级级别：
+                <!--{$typename}vip-->
+				<!--<input type="hidden" value="{$typemoney}" placeholder="请输入代金券" class="verify_num" id="needmoney">-->
+				<select name="" id="rank">
+					<!--<option value="<?php echo $username['type']+ 1;?>">{$typename}vip</option>-->
+					<option value="1">普通vip</option>
+					<option value="2">高级vip</option>
+					<option value="3">豪华vip</option>
+					<option value="4">至尊vip</option>
+				</select>
+				<i class="iconfont icon-xialaxuanzexiaosanjiao"></i>
 			</li>
 			<li class="mui-table-view-cell">
 				代金券：
@@ -106,6 +65,107 @@
 
 	</div>
 
+	<script type="text/javascript">
+        $(document).ready(function(){
+            $(".update_btn").click(function(){
+                var str,pwd,needmoney,rank;
+                str = $("#num").val();
+                pwd =$("#pwd").val();
+                rank = $("#rank option:selected").val();
+                needmoney =$("#needmoney").val();
+                $.ajax({      // 1 成功 2密码不对 3金额错误 4余额不足
+                    url: '/index.php/Home/User/upgradeType',
+                    type: 'get',
+                    data: {num:str,pwd:pwd,needmoney:needmoney,rank:rank}  ,
+                    dataType: 'json',
+                    timeout: 1000,
+                    success: function (data) {
+                        if(data == 1){
+                            layer.open({
+                                content: '升级成功'
+                                ,skin: 'msg'
+                                ,time: 2 //2秒后自动关闭
+                            });
 
+                            setTimeout(alertV,1000);
+                        }else if(data ==2){
+                            layer.open({
+                                content: '密码错误'
+                                ,skin: 'msg'
+                                ,time: 3//2秒后自动关闭
+                            });
+                        }else if(data ==3){
+                            layer.open({
+                                content: '金额错误'
+                                ,skin: 'msg'
+                                ,time: 3//2秒后自动关闭
+                            });
+                        }else if(data ==4){
+                            layer.open({
+                                content: '余额不足'
+                                ,skin: 'msg'
+                                ,time: 3//2秒后自动关闭
+                            });
+                        }else if(data ==5){
+                            layer.open({
+                                content: '至尊会员不可再升级'
+                                ,skin: 'msg'
+                                ,time: 3//2秒后自动关闭
+                            });
+                        }else if(data ==6){
+                            layer.open({
+                                content: '升级类型应高于当前类型'
+                                ,skin: 'msg'
+                                ,time: 3//2秒后自动关闭
+                            });
+                        }
+                        console.log(data)
+                    },
+                    fail: function (err, status) {
+                        console.log(err)
+                    }
+                })
+            });
+
+            $(".verify_btn").click(function(){
+                var str;
+                str = $("#num").val();
+                $.ajax({
+                    url: '/index.php/Home/User/isquan',
+                    type: 'get',
+                    data: {num:str} ,
+                    dataType: 'json',
+                    timeout: 1000,
+                    success: function (data) {
+                        if(data == 1){
+                            layer.open({
+                                content: '券可使用'
+                                ,skin: 'msg'
+                                ,time: 3 //2秒后自动关闭
+                            });
+                        }else if(data ==2){
+                            layer.open({
+                                content: '券已经失效'
+                                ,skin: 'msg'
+                                ,time: 3//2秒后自动关闭
+                            });
+                        }else if(data ==0){
+                            layer.open({
+                                content: '券不可使用'
+                                ,skin: 'msg'
+                                ,time: 3//2秒后自动关闭
+                            });
+                        }
+                        console.log(data)
+                    },
+                    fail: function (err) {
+                        console.log(err)
+                    }
+                })
+            });
+        });
+
+        function alertV(){ window.location.reload(); }
+	</script>
 </body>
 </html>
