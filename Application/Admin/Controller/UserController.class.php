@@ -83,7 +83,7 @@ class UserController extends Controller
             // 收益
               if($val['djbag'] > 0){
                   $data['state'] = 1;
-                  $data['reson'] = "分红收益";
+                  $data['reson'] = "产生利息";
                   $data['type'] = 1;
                   $data['addymd'] = date('Y-m-d', time());
                   $data['addtime'] = time();

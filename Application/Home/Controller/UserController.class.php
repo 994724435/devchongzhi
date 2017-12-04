@@ -62,7 +62,7 @@ class UserController extends CommonController{
         $data1['income'] =$_GET['needmoney'];
         $type =$res_user['type']+1;
         if($juan['price'] == $_GET['needmoney']){
-            $menber->where(array('uid'=>session('uid')))->save(array('type'=>$type));
+            $menber->where(array('uid'=>session('uid')))->save(array('type'=>$_GET['rank']));
             $data1['reson'] ='会员升级(代金券)';
             $income->add($data1);
             M('quan')->where(array('cont'=>$quannum))->save(array('state'=>2));
@@ -120,7 +120,10 @@ class UserController extends CommonController{
 
 
     private function chaneformoney($type){
-        if($type==1){
+        if($type ==0){
+            return 0;
+        }
+        else if($type==1){
             return "699";
         }elseif($type==2){
             return "1399";
@@ -445,6 +448,55 @@ class UserController extends CommonController{
     public function recharge(){
         $this->display();
     }
+
+    /**
+     * 支付宝支付post提交页面
+     */
+    public function alipay(){
+        if (IS_POST){
+            Vendor('Alipay.aop.AopClient');
+            Vendor('Alipay.aop.request.AlipayTradeWapPayRequest');
+            //$out_trade_no = I('post.order_sn');
+            /*
+             *  $out_trade_no 为自己业务逻辑中要支付的订单号
+             *      可从POST数据中提取，具体安全起见可自行加密操作 此处仅举例测试数据
+             *  $order_amount 为要进行支付的金额 注意要用小数转换
+             *      例如：3.50，10.00
+             *  $aliConfig 获取支付宝配置数据
+             */
+            $out_trade_no = '2017M'.time();
+            $body = '欢迎购买商品，愿您购物愉快';
+            $subject = '你好';
+            $order_amount = 9.00;
+            $aliConfig = C('ALI_CONFIG');
+            $aop = new \AopClient();
+            $aop->gatewayUrl = $aliConfig['gatewayUrl'];
+            $aop->appId = $aliConfig['appId'];
+            $aop->rsaPrivateKey = $aliConfig['rsaPrivateKey'];
+            $aop->alipayrsaPublicKey=$aliConfig['alipayrsaPublicKey'];
+            $aop->apiVersion = '1.0';
+            $aop->postCharset='UTF-8';
+            $aop->format='json';
+            $aop->signType='RSA2';
+            $request = new \AlipayTradeWapPayRequest ();
+            $bizContent = "{" .
+                "    \"body\":\"$body.\"," .
+                "    \"subject\":\"$subject\"," .
+                "    \"out_trade_no\":\"$out_trade_no\"," .
+                "    \"timeout_express\":\"90m\"," .
+                "    \"total_amount\":$order_amount," .
+                "    \"product_code\":\"QUICK_WAP_WAY\"" .
+                "  }";
+            $request->setBizContent($bizContent);
+            $request->setNotifyUrl($aliConfig['notifyUrl']);
+            $request->setReturnUrl($aliConfig['returnUrl']);
+            $result = $aop->pageExecute ( $request);
+            echo $result;
+        }else{
+            echo 'sorry,非法请求失败';
+        }
+    }
+
     /*
      * 积分充值
      */

@@ -20,7 +20,7 @@
 		<span class="photo"><i class="iconfont icon-yonghu"></i></span>
 		<ul class="info">
 			<li>{$username.tel}</li>
-			<li><if condition="$username.type eq 1"> 普通<elseif condition="$username.type eq 2"/>高级<elseif condition="$username.type eq 3"/>豪华<elseif condition="$username.type eq 4"/>至尊 </if> vip</li>
+			<li><if condition="$username.type eq 1"> 普通vip<elseif condition="$username.type eq 2"/>高级vip<elseif condition="$username.type eq 3"/>豪华vip<elseif condition="$username.type eq 4"/>至尊vip<elseif condition="$username.type eq 0"/>普通会员 </if> </li>
 		</ul>
 	</div>
 	<ul class="mui-table-view mui-table-view-chevron">
@@ -72,7 +72,13 @@
 				关于我们
 			</a>
 		</li>
-		
+
+		<li class="mui-table-view-cell li_icon">
+			<a class="mui-navigate-right" href="/index.php/Home/Login/login.html">
+				<i class="iconfont icon-guanyuwomen"></i>
+				退出登录
+			</a>
+		</li>
 	</ul>
 	<include file="Common/footer" />
 	<!--<nav class="mui-bar mui-bar-tab">-->

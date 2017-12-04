@@ -28,7 +28,7 @@
 				当前用户：{$username.tel}
 			</li>
 			<li class="mui-table-view-cell">
-				当前级别：<if condition="$username.type eq 1"> 普通<elseif condition="$username.type eq 2"/>高级<elseif condition="$username.type eq 3"/>豪华<elseif condition="$username.type eq 4"/>至尊 </if> vip
+				当前级别：<span id="grade"><if condition="$username.type eq 1"> 普通vip<elseif condition="$username.type eq 2"/>高级vip<elseif condition="$username.type eq 3"/>豪华vip<elseif condition="$username.type eq 4"/>至尊vip<elseif condition="$username.type eq 0"/>普通会员 </if></span>
 			</li>
 			<li class="mui-table-view-cell">
 				升级级别：
@@ -49,7 +49,7 @@
 				<span class="verify_btn">验证代金券</span>	
 			</li>
 			<li class="mui-table-view-cell">
-				升级费用：<span class="update_money">{$typemoney}元</span>
+				升级费用：<span class="update_money"><span id="update_money" class="update_money">{$typemoney}</span>元</span>
 			</li>
 			<li class="mui-table-view-cell">
 				账户余额：<span class="update_money">{$username.chargebag}元</span>
@@ -67,6 +67,96 @@
 
 	<script type="text/javascript">
         $(document).ready(function(){
+            var grade=$("#grade").html();
+//            console.log(grade);
+            switch(grade) {
+                case "":
+                    $("#rank option").eq(0).attr('selected',"selected");
+                    $("#update_money").html(699);
+                    break;
+                case "普通会员":
+                    $("#rank option").eq(0).attr('selected',"selected");
+                    $("#update_money").html(699);
+                    break;
+                case "普通vip":
+                    $("#rank option").eq(0).hide();
+                    $("#rank option").eq(1).attr('selected',"selected");
+                    $("#update_money").html(700);
+                    break;
+                case "高级vip":
+                    $("#rank option").eq(0).hide();
+                    $("#rank option").eq(1).hide();
+                    $("#rank option").eq(2).attr('selected',"selected");
+                    $("#update_money").html(600);
+                    break;
+                case "豪华vip":
+                    $("#rank option").eq(0).hide();
+                    $("#rank option").eq(1).hide();
+                    $("#rank option").eq(2).hide();
+                    $("#rank option").eq(3).attr('selected',"selected");
+                    $("#update_money").html(700);
+                    break;
+            }
+            $("select").change(function() {
+                var n=parseInt($(this).val());
+                var grade=$("#grade").html();
+                console.log(grade);
+
+                switch(grade) {
+                    case "":
+                        switch(n){
+                            case 1: $("#update_money").html(699);
+                            break;
+                            case 2: $("#update_money").html(1399);
+                            break;
+                            case 3: $("#update_money").html(1999);
+                            break;
+                            case 4: $("#update_money").html(2699);
+                            break;
+                         }
+                        break;
+                       
+                    case "普通会员":
+                        switch(n){
+                            case 1: $("#update_money").html(699);
+                                break;
+                            case 2: $("#update_money").html(1399);
+                            break;
+                            case 3: $("#update_money").html(1999);
+                            break;
+                            case 4: $("#update_money").html(2699);
+                            break;
+                         }
+                        break;
+                    case "普通vip":
+                        switch(n){
+                            case 2: $("#update_money").html(700);
+                                break;
+                            case 3: $("#update_money").html(1300);
+                                break;
+                            case 4: $("#update_money").html(2000);
+                                break;
+                        }
+                        break;
+                    case "高级vip":
+                        switch(n){
+                            case 3: $("#update_money").html(600);
+                            break;
+                            case 4: $("#update_money").html(1300);
+                            break;
+                         }
+                        break;
+                    case "豪华vip":
+                       switch(n){
+                            case 4: $("#update_money").html(700);
+                            break;
+                         }
+                        break;
+                }
+                
+                console.log($("#rank").val())
+            });
+
             $(".update_btn").click(function(){
                 var str,pwd,needmoney,rank;
                 str = $("#num").val();

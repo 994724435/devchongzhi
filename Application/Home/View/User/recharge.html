@@ -20,11 +20,11 @@
 	  <h1 class="mui-title">充值</h1>
 	</header>
 	<div class="mui-content">
-		<form class="mui-input-group">
+		<form class="mui-input-group" action="/index.php/Home/User/alipay" method="post">
 			
 		    <div class="mui-input-row">
 		        <label>充值金额</label>
-		        <input type="number" class="mui-input-clear" placeholder="请输入充值金额" id="num">
+		        <input type="number" name="num" class="mui-input-clear" placeholder="请输入充值金额" id="num">
 		    </div>
 			<button class="mui-btn mui-btn-block" id="submit">确认充值</button>
 		</form>
