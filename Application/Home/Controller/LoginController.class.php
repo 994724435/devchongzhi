@@ -155,12 +155,12 @@ class LoginController extends Controller{
 
         vendor('Ucpaas.Ucpaas','','.class.php');
         //初始化必填
-        $options['accountsid']='2f140e7145f0391eb539a6eb230f0da2';
-        $options['token']='62a4c1aaba735785bc665846cceeb279';
+        $options['accountsid']='bbfd7ced6526e2dcae086c23a29f9b3a';
+        $options['token']='58ae7eb5ce61bc7af4a63349b334b45b';
         $ucpass = new \Ucpaas($options);
-        $appId = "732e6276d98c489794f37a83de160d10";
+        $appId = "d5595fef119f46da9f07ea023beb0608";
         $to = $tel;
-        $templateId = "237452";
+        $templateId = "240596";
         $param=$data['cont'] ;
         $resmsg =$ucpass->templateSMS($appId,$to,$templateId,$param);
         session('messageEid',$data['session']);
