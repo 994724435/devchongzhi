@@ -24,8 +24,10 @@ document.addEventListener('DOMContentLoaded', recalc, false);
 $(function(){
  	$("nav a").click(function() {
  		var href=$(this).attr('data-href');
+ 		$(this).addClass('mui-active').siblings().removeClass('mui-active');
 	    if(href){
 	   	   window.location.href=href;
+
 	    }
 	   
 	});
