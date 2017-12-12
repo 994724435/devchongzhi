@@ -16,8 +16,8 @@ return array(
         //支付宝公钥，由支付宝生成: 请填写支付宝公钥，一行字符串
         'alipayrsaPublicKey'    =>  'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApwsosfUrkB+BHoVMldesa9STLVdl6oyQcWcb8yjCjiWYg/vVQo01cdweSgNXmVFdU0zq7Tdjpcikm1A3pe8TQ+u7t2Cybg1IizIu59nUMgMl8xMUE4J3RzzG6KDgDg2xXiJTsL9HWCG3YGgDW1suvX8GQbsfpMpU4RBOeniU2NHqLUW3U3JLA212LNHbVkgKoFiDpVLYkNyPDskUMEdLlwyXjlqsat1rmTcJzYC/J6MUym4c/1z2hXajDC6dcG6sfK/6t7iHH0+joDo8EVXS1QRt2fLX9lTFRXBHMdJCCCsLpEzBq4h7hM4MHsf3JfAc9rCexn2SpvqxT7vxOhw/AQIDAQAB',
         'notifyUrl'             => 'http://ydc.shuijingjiafang.com', // 支付成功通知地址
-        'returnUrl'             => 'http://ydc.shuijingjiafang.com', // 支付后跳转地址
-        'returnPcUrl'           => 'http://ydc.shuijingjiafang.com', // PC端扫码支付后跳转地址
+        'returnUrl'             => 'http://k36668.cn/index.php/Home/Login/pay', // 支付后跳转地址
+        'returnPcUrl'           => 'http://k36668.cn', // PC端扫码支付后跳转地址
     ),
 //	'URL_MODEL' => '2',
 //	 'DEFAULT_MODULE' => 'Index'

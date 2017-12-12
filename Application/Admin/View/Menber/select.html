@@ -31,12 +31,14 @@
 		        </tr>
 		        <tr>
 		          <th>用户id</th>
+
 					<th>注册上家id</th>
 					<th>姓名</th>
+					<th>等级</th>
 					<th>电话</th>
-		          <th>股份</th>
-
-				  <th>积分</th>
+		          <th>商城积分</th>
+				  <th>当前可用余额</th>
+					<th>智能充余额</th>
 		          <th>注册时间</th>
 					<th>操作</th>
 		        </tr>
@@ -55,11 +57,15 @@
 					}
 		      	?>
 		          <th scope="row">{$v.uid}</th>
+
 				  <th>{$v.fuid}</th>
+
 				  <th>{$v.name}</th>
+				  <th><if condition="$v.type eq 1"> 普通vip<elseif condition="$v.type eq 2"/>高级vip<elseif condition="$v.type eq 3"/>豪华vip<elseif condition="$username.type eq 4"/>至尊vip<elseif condition="$v.type eq 0"/>普通会员 </if> </th>
 				  <th>{$v.tel}</th>
 		           <th>{$v.dongbag}</th>
 				  <th>{$v.chargebag}</th>
+				  <th>{$v.jingbag}</th>
 				  <td>{$v.addymd}</td>
 				  <th><a href="__ROOT__/index.php/Admin/Menber/editeUser/id/{$v.uid}">修 改 </a></th>
 		        </tr>

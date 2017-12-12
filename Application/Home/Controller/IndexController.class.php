@@ -75,12 +75,20 @@ class IndexController extends CommonController {
 
 
 
+//1分红收益 2充值 3静态提现  4升级  5 注册下级 6下单购买 7积分体现 8话费充值 9 回馈奖 10积分商城购买 11工单
     public function  assets(){
-        $pro = M('incomelog')->where(array('userid'=>session('uid'),'type'=>1))->sum('income');
+        $con['userid'] =session('uid');
+        $con['state'] =1;
+        $con['type'] =array('in','1,9,11');
+        $pro = M('incomelog')->where($con)->sum('income');
         $pro = bcadd($pro,0,2);
+        $shouyi =M("incomelog")->where(array('state'=>1,'type'=>1))->sum('income');
+        $pro2 = bcadd($shouyi,0,2);
         $this->assign('incomes',$pro);
+        $this->assign('incomes2',$pro2);
         $this->display();
     }
+
 
     public function  assetsin(){
         if($this->isdong()){
@@ -91,6 +99,14 @@ class IndexController extends CommonController {
         }
         $member = M("menber");
         $userinfo =$member->where(array('uid'=>session('uid')))->find();
+
+        if(!$userinfo['type']){
+            echo "<script>alert('需购买VIP套餐才能转入');";
+            echo "window.location.href='".__ROOT__."/index.php/Home/Index/assets.html';";
+            echo "</script>";
+            exit;
+        }
+
         $allmoney =bcadd($userinfo['chargebag'],$userinfo['jingbag'],2);
         $member->where(array('uid'=>session('uid')))->save(array('chargebag'=>'0.00','jingbag'=>$allmoney));
         echo "<script>";
@@ -108,6 +124,12 @@ class IndexController extends CommonController {
         }
         $member = M("menber");
         $userinfo =$member->where(array('uid'=>session('uid')))->find();
+        if(!$userinfo['type']){
+            echo "<script>alert('需购买VIP套餐才能转出');";
+            echo "window.location.href='".__ROOT__."/index.php/Home/Index/assets.html';";
+            echo "</script>";
+            exit;
+        }
         $allmoney =bcadd($userinfo['chargebag'],$userinfo['jingbag'],2);
         $member->where(array('uid'=>session('uid')))->save(array('chargebag'=>$allmoney,'jingbag'=>'0.00'));
         echo "<script>";
@@ -126,6 +148,14 @@ class IndexController extends CommonController {
     }
 
     public function mall(){
+        $member = M("menber");
+        $userinfo =$member->where(array('uid'=>session('uid')))->find();
+        if($userinfo['type'] < 2){
+            echo "<script>alert('您的权限不够需要开通会员');";
+            echo "window.location.href='".__ROOT__."/index.php/Home/User/my.html';";
+            echo "</script>";
+            exit;
+        }
         $pro = M('product')->where(array('type'=>2,'state'=>1))->select();
         $this->assign('pro',$pro);
         $this->display();
@@ -135,7 +165,7 @@ class IndexController extends CommonController {
         $member = M("menber");
         $userinfo =$member->where(array('uid'=>session('uid')))->find();
         if($userinfo['type'] < 3){
-            echo "<script>alert('空冲商城需豪华会员访问');";
+            echo "<script>alert('您的权限不够需要提升等级');";
             echo "window.location.href='".__ROOT__."/index.php/Home/User/my.html';";
             echo "</script>";
             exit;
@@ -154,15 +184,22 @@ class IndexController extends CommonController {
         if($_POST){
             if($_POST['num']<=0){
                 echo "<script>alert('请输入正确金额在');";
-                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/withdraw';";
                 echo "</script>";
                 exit;
             }
             $menber =M('menber');
+            if($_POST['zhifubao']){
+                $menber->where(array('uid'=>session('uid')))->save(array('zhifubao'=>$_POST['zhifubao']));
+            }
+            if($_POST['weixin']){
+                $menber->where(array('uid'=>session('uid')))->save(array('weixin'=>$_POST['weixin']));
+            }
+
             $res_user = $menber->where(array('uid'=>session('uid')))->select();
             if($res_user[0]['pwd2'] != $_POST['pwd2']){
                 echo "<script>alert('二级密码错误');";
-                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
+                echo "window.location.href='".__ROOT__."/index.php/Home/User/withdraw';";
                 echo "</script>";
                 exit;
             }
@@ -174,13 +211,13 @@ class IndexController extends CommonController {
 //                exit;
 //            }
 
-            $max = M("config")->where(array('id'=>19))->find();
-            if($_POST['num'] > $max['value']){
-                echo "<script>alert('提现额度大于".$max['value']."');";
-                echo "window.location.href='".__ROOT__."/index.php/Home/User/width_draw';";
-                echo "</script>";
-                exit;
-            }
+//            $max = M("config")->where(array('id'=>19))->find();
+//            if($_POST['num'] > $max['value']){
+//                echo "<script>alert('提现额度大于".$max['value']."');";
+//                echo "window.location.href='".__ROOT__."/index.php/Home/User/withdraw';";
+//                echo "</script>";
+//                exit;
+//            }
 
 //            $income =M('incomelog');
 //            $istoday =$income->where(array('type'=>7,'userid'=>session('uid'),'addymd'=>date('Y-m-d',time())))->find();

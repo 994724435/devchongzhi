@@ -115,6 +115,7 @@ class MenberController extends CommonController {
             }
             $data =$_POST;
             $data['chargebag'] = '0';
+            $data['type'] = 0;
             $data['addtime'] = time();
             $data['addymd'] =date("Y-m-d H:i:s",time());
             if($_POST['fuid']){
@@ -226,8 +227,8 @@ class MenberController extends CommonController {
 
     public function tixiansheng(){
         $income =M('incomelog');
-//        $data['p_incomelog.type'] = 7;
-        $data['p_incomelog.type'] = array('in','3,4,7');
+        $data['p_incomelog.type'] = 7;
+//        $data['p_incomelog.type'] = array('in','3,4,7');
         $data['p_incomelog.state'] =0;
         $data['p_incomelog.addtime'] =array('gt',0);
         $result =$income->field('p_incomelog.addtime as addtimes,p_incomelog.addymd as addymds,p_menber.name,p_menber.tel,p_menber.email,p_menber.realname,p_menber.zhifubao,p_menber.weixin,p_menber.bank,p_menber.bankname,p_menber.bankfrom,p_incomelog.userid,income,id,orderid,reson')->join('p_menber ON p_incomelog.userid=p_menber.uid')->where($data)->select();

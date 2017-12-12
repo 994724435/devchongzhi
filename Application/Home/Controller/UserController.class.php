@@ -464,10 +464,25 @@ class UserController extends CommonController{
              *      例如：3.50，10.00
              *  $aliConfig 获取支付宝配置数据
              */
-            $out_trade_no = '2017M'.time();
-            $body = '欢迎购买商品，愿您购物愉快';
-            $subject = '你好';
-            $order_amount = 9.00;
+            $out_trade_no =time();
+
+
+            $order = M("incomelog");
+            $data['state'] = 0;
+            $data['type'] = 0;
+            $data['reson'] = "充值";
+            $data['addymd'] = date("Y-m-d H:i:s",time());
+            $data['addtime'] = $out_trade_no;
+            $data['userid'] = session('uid');
+            $data['income'] = $_POST['num'];
+            $data['orderid'] = $out_trade_no;
+            $data['cont'] = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+            $order->add($data);
+
+            $body = '易代冲';
+            $userinfo =M("menber")->where(array('uid'=> session('uid')))->find();
+            $subject = $userinfo['tel'].'账户充值';
+            $order_amount = $_POST['num'];
             $aliConfig = C('ALI_CONFIG');
             $aop = new \AopClient();
             $aop->gatewayUrl = $aliConfig['gatewayUrl'];

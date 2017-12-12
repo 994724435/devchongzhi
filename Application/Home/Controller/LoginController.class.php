@@ -211,18 +211,22 @@ class LoginController extends Controller{
     }
 
     public function pay(){
-        $token = $_GET['token'];
-        if($token == "admin123"){
+        $token = $_GET['out_trade_no'];
+        if($token){
             $logid = $_GET['id'];
             $order = M("incomelog");
             echo trim("SUCCESS");
-            $res= $order->where(array('id'=>$logid))->select();
+            $res= $order->where(array('addtime'=>$token))->select();
             if(!$res[0]['state']){
-                $order->where(array('id'=>$logid))->save(array('type'=>2,'state'=>1));
+                $order->where(array('id'=>$res[0]['id']))->save(array('type'=>2,'state'=>1));
                 $menber = M('menber')->where(array('uid'=>$res[0]['userid']))->select();
                 $charbag =bcadd($menber[0]['chargebag'],$res[0]['income'],2);
                 M('menber')->where(array('uid'=>$res[0]['userid']))->save(array('chargebag'=>$charbag));
             }
         }
+
+        echo "<script>window.location.href='".__ROOT__."/index.php/Home/Index/index';</script>";
+        exit();
+
     }
 }
